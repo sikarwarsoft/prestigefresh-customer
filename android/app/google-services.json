@@ -1,0 +1,121 @@
+{
+  "project_info": {
+    "project_number": "95150199145",
+    "project_id": "dawatme-e09bd",
+    "storage_bucket": "dawatme-e09bd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:95150199145:android:ed19206af75d9e659cedf8",
+        "android_client_info": {
+          "package_name": "com.ssoftwares.dawat.driver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "95150199145-009vibgrirgm88nh5inv8lbv641mg2gp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ssoftwares.dawat.driver",
+            "certificate_hash": "b88626bb13ca4be63a49cbf2bcfbaf0b1ea6bcc9"
+          }
+        },
+        {
+          "client_id": "95150199145-44spo440o2lk4du65klj2rsc801k5rd9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4bVtR4_uqL4WN0VmkdzZxE5yQwjKP7Ds"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "95150199145-44spo440o2lk4du65klj2rsc801k5rd9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:95150199145:android:7364bcb3b579ad649cedf8",
+        "android_client_info": {
+          "package_name": "com.ssoftwares.dawat.me"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "95150199145-mtag2kifra9a24ferul4ltunr4q7jlln.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ssoftwares.dawat.me",
+            "certificate_hash": "b88626bb13ca4be63a49cbf2bcfbaf0b1ea6bcc9"
+          }
+        },
+        {
+          "client_id": "95150199145-44spo440o2lk4du65klj2rsc801k5rd9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4bVtR4_uqL4WN0VmkdzZxE5yQwjKP7Ds"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "95150199145-44spo440o2lk4du65klj2rsc801k5rd9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:95150199145:android:3548fe2003b8d7589cedf8",
+        "android_client_info": {
+          "package_name": "com.ssoftwares.dawat.vendor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "95150199145-3khgsf8lsp6hko2t9g6prs24gfodl3fm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ssoftwares.dawat.vendor",
+            "certificate_hash": "b88626bb13ca4be63a49cbf2bcfbaf0b1ea6bcc9"
+          }
+        },
+        {
+          "client_id": "95150199145-44spo440o2lk4du65klj2rsc801k5rd9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4bVtR4_uqL4WN0VmkdzZxE5yQwjKP7Ds"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "95150199145-44spo440o2lk4du65klj2rsc801k5rd9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
