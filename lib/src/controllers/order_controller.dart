@@ -18,6 +18,7 @@ class OrderController extends ControllerMVC {
     final Stream<Order> stream = await getOrders();
     stream.listen((Order _order) {
       setState(() {
+        print("Data" + _order.toMap().toString());
         orders.add(_order);
       });
     }, onError: (a) {

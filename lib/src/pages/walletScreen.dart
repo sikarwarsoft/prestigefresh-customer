@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
@@ -91,71 +92,6 @@ class _WalletScreenState extends State<WalletScreen> {
 
   Future<void> showAddMoneyDialog(BuildContext context) async {
     await showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text('Add money'),
-            content: Form(
-              key: _key,
-              child: TextFormField(
-                keyboardType: TextInputType.number,
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'This field is required';
-                  }
-                  return null;
-                },
-                // onSaved: (value) => _money = value,
-                decoration: InputDecoration(
-                  labelText: 'amount',
-                  labelStyle: TextStyle(color: Theme.of(context).accentColor),
-                  contentPadding: EdgeInsets.all(12),
-                  hintText: '',
-                  hintStyle: TextStyle(
-                      color: Theme.of(context).focusColor.withOpacity(0.7)),
-                  prefixIcon: Icon(Icons.lock_outline,
-                      color: Theme.of(context).accentColor),
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color:
-                              Theme.of(context).focusColor.withOpacity(0.2))),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color:
-                              Theme.of(context).focusColor.withOpacity(0.5))),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color:
-                              Theme.of(context).focusColor.withOpacity(0.2))),
-                ),
-              ),
-            ),
-            actions: [
-              RaisedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  isLoading = true;
-                  getDetails();
-                  userStatement();
-                },
-                child: Text('Cancel'),
-              ),
-              RaisedButton(
-                onPressed: () {
-                  if (_key.currentState.validate()) {
-                    _key.currentState.save();
-                  }
-                },
-                child: Text('Continue'),
-              ),
-            ],
-          );
-        });
-  }
-
-  void _settingModalBottomSheet(context) {
-    showModalBottomSheet(
-        isScrollControlled: true,
         context: context,
         builder: (context) {
           return SingleChildScrollView(
@@ -271,6 +207,149 @@ class _WalletScreenState extends State<WalletScreen> {
         });
   }
 
+  void _settingModalBottomSheet(context) {
+    showModalBottomSheet(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(20.0))),
+        backgroundColor: Colors.white,
+        context: context,
+        isScrollControlled: false,
+        builder: (context) {
+          return Padding(
+            padding: MediaQuery.of(context).viewInsets,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(left: 15, right: 15, top: 20),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Add Money to Wallet',
+                          style: TextStyle(
+                              color: Theme.of(context).accentColor,
+                              fontSize: 32,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              'Available Balance',
+                              style: TextStyle(
+                                  color: Theme.of(context).accentColor,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            SizedBox(
+                              width: 8,
+                            ),
+                            Text(
+                              '₹ $amount',
+                              style: TextStyle(
+                                  color: Theme.of(context).accentColor,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15, right: 15),
+                    child: Form(
+                      key: _key,
+                      child: TextFormField(
+                        style: TextStyle(
+                          fontSize: 32,
+                        ),
+                        keyboardType: TextInputType.number,
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'This field is required';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) => addAmount = value,
+                        decoration: InputDecoration(
+                          labelText: 'Amount',
+                          labelStyle:
+                              TextStyle(color: Theme.of(context).accentColor),
+                          contentPadding: EdgeInsets.all(12),
+                          hintText: '',
+                          hintStyle: TextStyle(
+                              color: Theme.of(context)
+                                  .focusColor
+                                  .withOpacity(0.7)),
+                          prefixIcon: Icon(Icons.lock_outline,
+                              color: Theme.of(context).accentColor),
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Theme.of(context)
+                                      .focusColor
+                                      .withOpacity(0.2))),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Theme.of(context)
+                                      .focusColor
+                                      .withOpacity(0.5))),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Theme.of(context)
+                                      .focusColor
+                                      .withOpacity(0.2))),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15, right: 15),
+                    child: RaisedButton(
+                        color: Theme.of(context).accentColor,
+                        padding: EdgeInsets.all(10),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(20.0),
+                                bottom: Radius.circular(20.0))),
+                        child: Text(
+                          'Proceed',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                              fontSize: 16),
+                        ),
+                        onPressed: () {
+                          if (_key.currentState.validate()) {
+                            _key.currentState.save();
+                            openCheckout();
+                          }
+                        }),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
   void openCheckout() async {
     final key = Provider.of<CustomFieldsss>(context, listen: false).getRazorKey;
     print('sdsadsdsadasdsa' + key);
@@ -345,7 +424,7 @@ class _WalletScreenState extends State<WalletScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       // backgroundColor: Theme.of(context).accentColor,
       appBar: AppBar(
         title: Text(
@@ -371,6 +450,7 @@ class _WalletScreenState extends State<WalletScreen> {
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+
       body:
           // currentUser.value.apiToken == null
           //     ? PermissionDeniedWidget() :

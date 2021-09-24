@@ -37,7 +37,7 @@ class Order {
           ? OrderStatus.fromJSON(jsonMap['order_status'])
           : OrderStatus.fromJSON({});
       dateTime = DateTime.parse(jsonMap['updated_at']);
-      order_status_id=jsonMap['order_status_id'];
+      order_status_id = jsonMap['order_status_id'].toString();
       user = jsonMap['user'] != null
           ? User.fromJSON(jsonMap['user'])
           : User.fromJSON({});
@@ -52,7 +52,9 @@ class Order {
               .map((element) => ProductOrder.fromJSON(element))
               .toList()
           : [];
-      driver_id = jsonMap['driver_id'].toString();
+
+      driver_id =
+          jsonMap['driver_id'] != null ? jsonMap['driver_id'].toString() : "";
       total = jsonMap['total'] != null ? jsonMap['total'].toDouble() : 0.0;
       finalTax =
           jsonMap['finalTax'] != null ? jsonMap['finalTax'].toDouble() : 0.0;
@@ -89,8 +91,9 @@ class Order {
     map["products"] =
         productOrders?.map((element) => element.toMap())?.toList();
     map["payment"] = payment?.toMap();
-      map["delivery_address_id"] =deliveryAddress?.id == 'null' ?'24':deliveryAddress?.id;
-      map["isWallet"] = isWallet;
+    map["delivery_address_id"] =
+        deliveryAddress?.id == 'null' ? '24' : deliveryAddress?.id;
+    map["isWallet"] = isWallet;
 
     return map;
   }
