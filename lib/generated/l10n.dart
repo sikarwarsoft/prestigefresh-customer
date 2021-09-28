@@ -2337,7 +2337,7 @@ class S {
   /// `RazorPay`
   String get razorpay {
     return Intl.message(
-      'RazorPay',
+      'upi/card/wallet/netbanking',
       name: 'razorpay',
       desc: '',
       args: [],
@@ -2347,7 +2347,7 @@ class S {
   /// `Click to pay with RazorPay method`
   String get clickToPayWithRazorpayMethod {
     return Intl.message(
-      'Click to pay with RazorPay method',
+      'Click to pay with Online method',
       name: 'clickToPayWithRazorpayMethod',
       desc: '',
       args: [],

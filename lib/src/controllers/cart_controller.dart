@@ -189,7 +189,8 @@ class CartController extends ControllerMVC {
     stream.listen((Coupon _coupon) async {
       coupon = _coupon;
       dis = _coupon.discount;
-      maxDiscount = double.parse(_coupon.max_discount);
+      print("double value"+_coupon.max_discount.toString());
+      maxDiscount = double.parse(_coupon.max_discount.toString());
     }, onError: (a) {
       print(a);
       scaffoldKey?.currentState?.showSnackBar(SnackBar(

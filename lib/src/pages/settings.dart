@@ -8,7 +8,10 @@ import '../elements/PaymentSettingsDialog.dart';
 import '../elements/ProfileSettingsDialog.dart';
 import '../elements/SearchBarWidget.dart';
 import '../helpers/helper.dart';
+import '../models/user.dart';
 import '../repository/user_repository.dart';
+import 'reffer.dart';
+import 'walletScreen.dart';
 
 class SettingsWidget extends StatefulWidget {
   @override
@@ -17,9 +20,17 @@ class SettingsWidget extends StatefulWidget {
 
 class _SettingsWidgetState extends StateMVC<SettingsWidget> {
   SettingsController _con;
+  User _user;
 
   _SettingsWidgetState() : super(SettingsController()) {
     _con = controller;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _user = currentUser.value;
+    super.initState();
   }
 
   @override
@@ -111,7 +122,15 @@ class _SettingsWidgetState extends StateMVC<SettingsWidget> {
                         primary: false,
                         children: <Widget>[
                           ListTile(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => WalletScreen(
+                                        token: _user.apiToken,
+                                        id: _user.id,
+                                      )));
+                            },
                             dense: true,
                             title: Text(
                               'Wallet',
@@ -125,7 +144,10 @@ class _SettingsWidgetState extends StateMVC<SettingsWidget> {
                             ),
                           ),
                           ListTile(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                  context, MaterialPageRoute(builder: (context) => Reffer()));
+                            },
                             dense: true,
                             title: Text(
                               'Referal Code',
@@ -226,6 +248,7 @@ class _SettingsWidgetState extends StateMVC<SettingsWidget> {
                               style: Theme.of(context).textTheme.bodyText2,
                             ),
                             trailing: Text(
+                              // currentUser.value.address,
                               Helper.limitString(currentUser.value.address ??
                                   S.of(context).unknown),
                               overflow: TextOverflow.fade,

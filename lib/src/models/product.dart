@@ -155,7 +155,7 @@ class Product {
     coupon.valid = true;
     discountPrice = price;
     print((price * coupon.discount / 100));
-    print(double.parse(coupon.max_discount));
+    // print(double.parse(coupon.max_discount));
     if (coupon.discountType == 'fixed') {
       price -= coupon.discount;
     } else {
