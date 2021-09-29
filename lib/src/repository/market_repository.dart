@@ -30,6 +30,7 @@ Future<Stream<Market>> getNearMarkets(
   }
   _queryParams.addAll(filter.toQuery());
   uri = uri.replace(queryParameters: _queryParams);
+  print(uri);
   try {
     final client = new http.Client();
     final streamedRest = await client.send(http.Request('get', uri));
