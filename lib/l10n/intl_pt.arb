@@ -228,7 +228,7 @@
   "thisProductWasRemovedFromFavorites": "This product was removed from favorites",
   "productRefreshedSuccessfuly": "Product refreshed successfully",
   "razorpayPayment": "RazorPay Payment",
-  "razorpay": "RazorPay",
-  "clickToPayWithRazorpayMethod": "Click to pay with RazorPay method",
+  "razorpay": " upi/card/wallet/netbanking",
+  "clickToPayWithRazorpayMethod": "Click to pay with online method",
   "products": "Products"
 }

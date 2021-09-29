@@ -189,7 +189,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "profile_settings" : MessageLookupByLibrary.simpleMessage("Paramètres de profil"),
     "profile_settings_updated_successfully" : MessageLookupByLibrary.simpleMessage("Les paramètres de profil ont été mis à jour avec succès"),
     "quantity" : MessageLookupByLibrary.simpleMessage("Quantité"),
-    "razorpay" : MessageLookupByLibrary.simpleMessage("RazorPay"),
+    "razorpay" : MessageLookupByLibrary.simpleMessage(" upi/card/wallet/netbanking"),
     "razorpayPayment" : MessageLookupByLibrary.simpleMessage("RazorPay Payment"),
     "recent_orders" : MessageLookupByLibrary.simpleMessage("Dernières commandes"),
     "recent_reviews" : MessageLookupByLibrary.simpleMessage("Avis récents"),

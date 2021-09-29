@@ -5,6 +5,7 @@ import 'package:markets/src/pages/login.dart';
 import 'package:markets/src/pages/reffer.dart';
 import 'package:markets/src/pages/walletScreen.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import '../repository/user_repository.dart' as userRepo;
 
 import '../../generated/l10n.dart';
 import '../controllers/profile_controller.dart';
@@ -203,6 +204,7 @@ class _DrawerWidgetState extends StateMVC<DrawerWidget> {
           ListTile(
             onTap: () {
               if (currentUser.value.apiToken != null) {
+                userRepo.getAddresses();
                 Navigator.of(context).pushNamed('/Settings');
               } else {
                 Navigator.of(context).pushReplacementNamed('/Login');

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:markets/src/controllers/delivery_addresses_controller.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../generated/l10n.dart';
@@ -21,6 +22,12 @@ class SettingsWidget extends StatefulWidget {
 class _SettingsWidgetState extends StateMVC<SettingsWidget> {
   SettingsController _con;
   User _user;
+  DeliveryAddressesController _conn;
+
+  // _SettingsWidgetState()
+  //     : super(DeliveryAddressesController()) {
+  //   _conn = controller;
+  // }
 
   _SettingsWidgetState() : super(SettingsController()) {
     _con = controller;
@@ -248,8 +255,9 @@ class _SettingsWidgetState extends StateMVC<SettingsWidget> {
                               style: Theme.of(context).textTheme.bodyText2,
                             ),
                             trailing: Text(
+                              // _conn.addresses.elementAt(0).address
                               // currentUser.value.address,
-                              Helper.limitString(currentUser.value.address ??
+                              Helper.limitString(currentUser.value.address.toString() ??
                                   S.of(context).unknown),
                               overflow: TextOverflow.fade,
                               softWrap: false,
