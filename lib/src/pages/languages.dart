@@ -85,9 +85,12 @@ class _LanguagesWidgetState extends State<LanguagesWidget> {
                 return InkWell(
                   onTap: () async {
                     var _lang = _language.code.split("_");
-                    if (_lang.length > 1)
+                    if (_lang.length > 1){
+                      print("fifi");
                       settingRepo.setting.value.mobileLanguage.value = new Locale(_lang.elementAt(0), _lang.elementAt(1));
+                    }
                     else
+                      print("elseelse");
                       settingRepo.setting.value.mobileLanguage.value = new Locale(_lang.elementAt(0));
                     settingRepo.setting.notifyListeners();
                     languagesList.languages.forEach((_l) {

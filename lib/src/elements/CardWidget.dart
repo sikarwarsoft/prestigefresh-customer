@@ -138,25 +138,44 @@ class CardWidget extends StatelessWidget {
                 Expanded(
                   child: Column(
                     children: <Widget>[
-                      FlatButton(
-                        padding: EdgeInsets.all(0),
-                        onPressed: () {
-                          Navigator.of(context).pushNamed('/Pages',
-                              arguments:
-                                  new RouteArgument(id: '1', param: market));
-                        },
-                        child: Icon(Icons.directions,
-                            color: Theme.of(context).primaryColor),
-                        color: Theme.of(context).accentColor,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5)),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).accentColor,
+                          borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(5.0),
+                              bottomRight: Radius.circular(5.0),
+                              topLeft: Radius.circular(5.0),
+                              bottomLeft: Radius.circular(5.0)),
+                        ),
+                        // shape: RoundedRectangleBorder(
+                        //     borderRadius: BorderRadius.circular(5)),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left:18.0,right: 18,top: 8,bottom: 8),
+                          child: Icon(Icons.directions,
+                              color: Theme.of(context).primaryColor),
+                        ),
                       ),
+                      // FlatButton(
+                      //   padding: EdgeInsets.all(0),
+                      //
+                      //   onPressed: () {
+                      //     null;
+                      //     // Navigator.of(context).pushNamed('/Pages',
+                      //     //     arguments:
+                      //     //         new RouteArgument(id: '1', param: market));
+                      //   },
+                      //   child: Icon(Icons.directions,
+                      //       color: Theme.of(context).primaryColor),
+                      //   color: Theme.of(context).accentColor,
+                      //   shape: RoundedRectangleBorder(
+                      //       borderRadius: BorderRadius.circular(5)),
+                      // ),
                       market.distance > 0
                           ? Text(
                               Helper.getDistance(
                                   market.distance,
                                   Helper.of(context)
-                                      .trans(setting.value.distanceUnit)),
+                                      .trans(setting.value.distanceUnit,"")),
                               overflow: TextOverflow.fade,
                               maxLines: 1,
                               softWrap: false,

@@ -19,7 +19,9 @@ import '../models/setting.dart';
 
 ValueNotifier<Setting> setting = new ValueNotifier(new Setting());
 ValueNotifier<Address> deliveryAddress = new ValueNotifier(new Address());
-Coupon coupon = new Coupon.fromJSON({});
+Coupon coupon = new Coupon.fromJSON({
+
+});
 final navigatorKey = GlobalKey<NavigatorState>();
 
 Future<Setting> initSettings() async {

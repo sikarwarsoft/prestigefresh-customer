@@ -6,6 +6,7 @@ import 'package:markets/src/models/address.dart';
 import 'package:markets/src/repository/settings_repository.dart';
 import 'package:markets/src/repository/user_repository.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../generated/l10n.dart';
 import '../helpers/helper.dart';
@@ -98,16 +99,23 @@ class UserController extends ControllerMVC {
     }
   }
 
-  void register() async {
+  Future<bool> register() async {
     print("register");
     FocusScope.of(context).unfocus();
     {
       Overlay.of(context).insert(loader);
+      print("gerister");
       repository.register(user).then((value) async {
         print('i ma in');
+        print(value);
         if (value != null && value.apiToken != null) {
           _conAddress = DeliveryAddressesController();
 
+          // LocationResult result = await showLocationPicker(
+          //   context,
+          //   setting.value.googleMapsKey,
+          //   initialCenter: LatLng(deliveryAddress.value?.latitude ?? 0,
+          //       deliveryAddress.value?.longitude ?? 0),
           LocationResult result = await showLocationPicker(
             context,
             setting.value.googleMapsKey,
@@ -146,9 +154,13 @@ class UserController extends ControllerMVC {
             Navigator.of(context).pushReplacementNamed('/Pages', arguments: 2);
           }
         } else {
+          print("elseu");
+
           scaffoldKey?.currentState?.showSnackBar(SnackBar(
             content: Text(S.of(context).wrong_email_or_password),
           ));
+          Navigator.pop(context);
+          return false;
         }
       }).catchError((e) {
         loader.remove();
@@ -159,6 +171,18 @@ class UserController extends ControllerMVC {
         Helper.hideLoader(loader);
       });
     }
+  }
+
+  void showToast(message, Color color) {
+    print(message);
+    Fluttertoast.showToast(
+        msg: message,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 2,
+        backgroundColor: color,
+        textColor: Colors.orange,
+        fontSize: 16.0);
   }
 
   void resetPassword() {

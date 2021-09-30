@@ -14,6 +14,7 @@ class LanguagesList {
   LanguagesList() {
     this._languages = [
       new Language("en", "English", "English", "assets/img/united-states-of-america.png"),
+      new Language("bn", "Bengali", "বাংলা", "assets/img/bangal.png"),
       // new Language("ar", "Arabic", "العربية", "assets/img/united-arab-emirates.png"),
       // new Language("es", "Spanish", "Spana", "assets/img/spain.png"),
       // new Language("fr", "French (France)", "Français - France", "assets/img/france.png"),

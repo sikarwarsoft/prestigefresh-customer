@@ -583,18 +583,52 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                         ),
                                       ),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 20),
-                                      child: Helper.getPrice(
-                                        _con.total,
-                                        context,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline4
-                                            .merge(TextStyle(
-                                                color: Theme.of(context)
-                                                    .primaryColor)),
+                                    InkWell(
+                                      onTap: () {
+
+                                        if (currentUser.value.apiToken ==
+                                            null) {
+                                          Navigator.of(context)
+                                              .pushNamed("/Login");
+                                        } else {
+                                          if (_con
+                                              .isSameMarkets(_con.product)) {
+                                            _con.addToCart(_con.product);
+                                          } else {
+                                            showDialog(
+                                              context: context,
+                                              builder:
+                                                  (BuildContext context) {
+                                                // return object of type Dialog
+                                                return AddToCartAlertDialogWidget(
+                                                    oldProduct: _con.carts
+                                                        .elementAt(0)
+                                                        ?.product,
+                                                    newProduct: _con.product,
+                                                    onPressed: (product,
+                                                        {reset: true}) {
+                                                      return _con.addToCart(
+                                                          _con.product,
+                                                          reset: true);
+                                                    });
+                                              },
+                                            );
+                                          }
+                                        }
+                                      },
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 20),
+                                        child: Helper.getPrice(
+                                          _con.total,
+                                          context,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline4
+                                              .merge(TextStyle(
+                                                  color: Theme.of(context)
+                                                      .primaryColor)),
+                                        ),
                                       ),
                                     )
                                   ],

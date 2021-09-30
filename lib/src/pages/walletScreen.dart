@@ -111,11 +111,12 @@ class _WalletScreenState extends State<WalletScreen> {
                       children: [
                         Text(
                           'Add Money to Wallet',
-                          style: TextStyle(
-                              color: Theme.of(context).accentColor,
-                              fontSize: 25,
-                              // fontWeight: FontWeight.w500
-                          ),
+                          style: Theme.of(context).textTheme.subtitle1,
+                          // style: TextStyle(
+                          //     color: Theme.of(context).accentColor,
+                          //     fontSize: 25,
+                          //     // fontWeight: FontWeight.w500
+                          // ),
                         ),
                         SizedBox(
                           height: 8,
@@ -233,11 +234,12 @@ class _WalletScreenState extends State<WalletScreen> {
                       children: [
                         Text(
                           'Add Money to Wallet',
-                          style: TextStyle(
-                              color: Theme.of(context).accentColor,
-                              fontSize: 25,
+                      style: Theme.of(context).textTheme.headline1,
+                          // style: TextStyle(
+                          //     color: Theme.of(context).accentColor,
+                          //     fontSize: 25,
                               // fontWeight: FontWeight.w500
-                          ),
+                          // ),
                         ),
                         SizedBox(
                           height: 8,
@@ -246,20 +248,22 @@ class _WalletScreenState extends State<WalletScreen> {
                           children: [
                             Text(
                               'Available Balance',
-                              style: TextStyle(
-                                  color: Theme.of(context).accentColor,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500),
+                              style: Theme.of(context).textTheme.subtitle1,
+                              // style: TextStyle(
+                              //     color: Theme.of(context).accentColor,
+                              //     fontSize: 15,
+                              //     fontWeight: FontWeight.w500),
                             ),
                             SizedBox(
                               width: 8,
                             ),
                             Text(
                               '₹ $amount',
-                              style: TextStyle(
-                                  color: Theme.of(context).accentColor,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500),
+                              style: Theme.of(context).textTheme.subtitle1,
+                              // style: TextStyle(
+                              //     color: Theme.of(context).accentColor,
+                              //     fontSize: 15,
+                              //     fontWeight: FontWeight.w500),
                             ),
                           ],
                         ),
@@ -287,16 +291,15 @@ class _WalletScreenState extends State<WalletScreen> {
                         onSaved: (value) => addAmount = value,
                         decoration: InputDecoration(
                           labelText: 'Amount',
-                          labelStyle:
-                              TextStyle(color: Theme.of(context).accentColor),
+                          labelStyle: Theme.of(context).textTheme.subtitle1,
                           contentPadding: EdgeInsets.all(12),
                           hintText: '',
-                          hintStyle: TextStyle(
-                              color: Theme.of(context)
-                                  .focusColor
-                                  .withOpacity(0.7)),
+                          // hintStyle: TextStyle(
+                          //     color: Theme.of(context)
+                          //         .focusColor
+                          //         .withOpacity(0.7)),
                           prefixIcon: Icon(Icons.lock_outline,
-                              color: Theme.of(context).accentColor),
+                              color: Theme.of(context).focusColor.withOpacity(1),),
                           border: OutlineInputBorder(
                               borderSide: BorderSide(
                                   color: Theme.of(context)
@@ -445,7 +448,8 @@ class _WalletScreenState extends State<WalletScreen> {
       floatingActionButton: FloatingActionButton.extended(
         label: Text('Add Money'),
         icon: Icon(Icons.add),
-        backgroundColor: Theme.of(context).accentColor,
+        backgroundColor: Color(0xff12295b),
+        // backgroundColor: Theme.of(context).accentColor,
         onPressed: () {
           // showAddMoneyDialog(context);
           _settingModalBottomSheet(context);
@@ -462,46 +466,67 @@ class _WalletScreenState extends State<WalletScreen> {
                   padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
                   child: Column(
                     children: [
-                      Container(
-                        decoration: BoxDecoration(
+                      Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        // color: Colors.blue[900],
+                        // decoration: BoxDecoration(
+                        //     borderRadius: BorderRadius.all(Radius.circular(16)),
+                        //     color: Colors.green.shade300),
+                        // padding:
+                        //     EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                        child: Container(
+                          height: MediaQuery.of(context).size.height*0.25,
+                          decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(16)),
-                            color: Colors.green.shade300),
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Available Balance',
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      // fontWeight: FontWeight.w500,
-                                      color: Colors.white),
-                                ),
-                                SizedBox(
-                                  height: 8,
-                                ),
-                                Text(
-                                  '  ₹ $amount',
-                                  style: TextStyle(
-                                      fontSize: 25,
-                                      // fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                ),
-                              ],
+                            image: DecorationImage(
+                              image: AssetImage("assets/img/bgcard.png"),
+                              fit: BoxFit.fitWidth,
+                              alignment: Alignment.topCenter,
                             ),
-                            CircleAvatar(
-                              child: Icon(
-                                Icons.arrow_forward_ios,
-                                color: Colors.green,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Available Balance',
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        // fontWeight: FontWeight.w500,
+                                        color: Colors.white
+                                        // color: Theme.of(context).accentColor
+
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 8,
+                                  ),
+                                  Text(
+                                    '₹ $amount',
+                                    style: TextStyle(
+                                        fontSize: 50,
+                                        // fontWeight: FontWeight.bold,
+                                        color: Colors.white
+                                    ),
+                                  ),
+
+                                ],
                               ),
-                              backgroundColor: Colors.white,
-                            ),
-                          ],
+                              // CircleAvatar(
+                              //   child: Icon(
+                              //     Icons.arrow_forward_ios,
+                              //     color: Colors.green,
+                              //   ),
+                              //   backgroundColor: Colors.white,
+                              // ),
+                            ],
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -514,7 +539,7 @@ class _WalletScreenState extends State<WalletScreen> {
                                   BorderRadius.all(Radius.circular(16)),
                               ),
                           padding: EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 16),
+                              horizontal: 0, vertical: 8),
                           child: Column(
                             children: [
                               Row(
@@ -523,20 +548,32 @@ class _WalletScreenState extends State<WalletScreen> {
                                 children: [
                                   Text(
                                     'Transactions',
-                                    style: TextStyle(
-                                        // color: Colors.white,
-                                        color: Colors.green.shade300,
-                                        fontSize: 25,
-                                        // fontWeight: FontWeight.w600
-                                    ),
+                                    // style: TextStyle(
+                                    //     // color: Colors.white,
+                                    //   // color: Color(0xff12295b),
+                                    //     color: Theme.of(context).accentColor,
+                                    //     // color: Colors.green.shade300,
+                                    //     fontSize: 25,
+                                    //     fontWeight: FontWeight.w600
+                                    // ),
+                                    style: Theme.of(context).textTheme.subtitle1,
                                   ),
                                   Icon(
                                     Icons.bar_chart,
-                                    color: Colors.green.shade300,
+                                    // color: Colors.green.shade300,
+                                    // color: Color(0xff12295b),
                                     // color: Colors.white,
+                                    color: Theme.of(context).focusColor.withOpacity(1),
+                                    // color: Theme.of(context).accentColor,
                                     size: 30,
                                   )
                                 ],
+                              ),
+                              Divider(
+                                height: 20,
+                                thickness: 5,
+                                // indent: 20,
+                                // endIndent: 20,
                               ),
                               Container(
                                 width: double.infinity,
@@ -544,24 +581,34 @@ class _WalletScreenState extends State<WalletScreen> {
                                 child: ListView.builder(
                                     itemCount: llol.length,
                                     itemBuilder: (context, index) {
-                                      return ListTile(
-                                        leading: Icon(Icons.money,
-                                            color: Colors.black),
-                                        title: Text(
-                                          '${llol[index].transactionType}',
-                                          style: TextStyle(color: Colors.green.shade300,),
-                                        ),
-                                        subtitle: Text(
-                                          '${llol[index].transactionId}',
-                                          style: TextStyle(
-                                              color: Colors.green.shade300,
-                                              fontSize: 14),
-                                        ),
-                                        trailing: Text(
-                                          '  ₹ ${llol[index].transactionAmount.toString()}',
-                                          style: TextStyle(
-                                              color: Colors.green.shade300,
-                                              fontSize: 18),
+                                      return Card(
+                                        child: ListTile(
+                                          // leading: Icon(Icons.money,
+                                          //     color: Colors.black),
+                                          title: Text(
+                                            '${llol[index].transactionType}',
+                                            style: Theme.of(context).textTheme.subtitle2,
+                                            // style: TextStyle(
+                                            //   color: Color(0xff12295b),
+                                            //   // color: Theme.of(context).accentColor,
+                                            // ),
+                                          ),
+                                          subtitle: Text(
+                                            '${llol[index].transactionId}',
+                                            style: Theme.of(context).textTheme.bodyText1,
+                                            // style: TextStyle(
+                                            //     // color: Theme.of(context).accentColor,
+                                            //     color: Color(0xff12295b),
+                                            //     fontSize: 14),
+                                          ),
+                                          trailing: Text(
+                                            '  ₹ ${llol[index].transactionAmount.toString()}',
+                                            style: Theme.of(context).textTheme.bodyText1,
+                                            // style: TextStyle(
+                                            //     // color: Theme.of(context).accentColor,
+                                            //     color: Color(0xff12295b),
+                                            //     fontSize: 18),
+                                          ),
                                         ),
                                       );
                                     }),

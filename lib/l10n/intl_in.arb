@@ -150,7 +150,7 @@
   "the_product_has_been_rated_successfully": "The product has been rated successfully",
   "reviews_refreshed_successfully": "Reviews refreshed successfully!",
   "delivery_fee": "Delivery Fee",
-  "order_status_changed": "Order status changed",
+  "order_status_changed": "Order status : ",
   "new_order_from_client": "New order from client",
   "shopping": "Shopping",
   "delivery_or_pickup": "Delivery or Pickup",

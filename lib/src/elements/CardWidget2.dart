@@ -188,7 +188,7 @@ class CardWidget2 extends StatelessWidget {
                             Helper.getDistance(
                                 market.distance,
                                 Helper.of(context)
-                                    .trans(setting.value.distanceUnit)),
+                                    .trans(setting.value.distanceUnit,"")),
                             overflow: TextOverflow.fade,
                             maxLines: 1,
                             style: new TextStyle(

@@ -54,7 +54,7 @@ class _DetailsWidgetState extends StateMVC<DetailsWidget> {
           isExtended: true,
           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
           icon: Icon(
-            Icons.shopping_basket,
+            Icons.restaurant_menu,
             color: Theme.of(context).primaryColor,
           ),
           label: Text(
@@ -243,7 +243,7 @@ class _DetailsWidgetState extends StateMVC<DetailsWidget> {
                                       Helper.getDistance(
                                           _con.market.distance,
                                           Helper.of(context).trans(
-                                              setting.value.distanceUnit)),
+                                              setting.value.distanceUnit,"")),
                                       style: Theme.of(context)
                                           .textTheme
                                           .caption

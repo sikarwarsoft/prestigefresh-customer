@@ -2,9 +2,11 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../helpers/helper.dart';
 import '../models/address.dart';
@@ -50,15 +52,34 @@ Future<User> register(User user) async {
     headers: {HttpHeaders.contentTypeHeader: 'application/json'},
     body: json.encode(user.toMap()),
   );
-  print('json' + json.encode(user.toMap()));
+  var data;
+  print('jsonnn' + json.encode(user.  toMap()));
   if (response.statusCode == 200) {
     print('resss' + response.body);
     setCurrentUser(response.body);
+    data = json.decode(response.body)['success'];
+    print(data);
     currentUser.value = User.fromJSON(json.decode(response.body)['data']);
   } else {
     throw new Exception(response.body);
   }
-  return currentUser.value;
+  if(!data){
+    print(json.decode(response.body)['message']);
+    showToast("${json.decode(response.body)['message']}", Colors.red);
+  }
+  return (data)?currentUser.value:null;
+}
+
+void showToast(message, Color color) {
+  print(message);
+  Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.CENTER,
+      timeInSecForIosWeb: 2,
+      backgroundColor: color,
+      textColor: Colors.orange,
+      fontSize: 16.0);
 }
 
 Future<bool> resetPassword(User user) async {

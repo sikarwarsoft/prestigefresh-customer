@@ -52,42 +52,42 @@ class _FilterWidgetState extends StateMVC<FilterWidget> {
                 primary: true,
                 shrinkWrap: true,
                 children: <Widget>[
-                  ExpansionTile(
-                    title: Text(S.of(context).delivery_or_pickup),
-                    children: [
-                      CheckboxListTile(
-                        controlAffinity: ListTileControlAffinity.trailing,
-                        value: _con.filter?.delivery ?? false ? false : true,
-                        onChanged: (value) {
-                          setState(() {
-                            _con.filter?.delivery = value;
-                          });
-                        },
-                        title: Text(
-                          S.of(context).delivery,
-                          overflow: TextOverflow.fade,
-                          softWrap: false,
-                          maxLines: 1,
-                        ),
-                      ),
-                      // CheckboxListTile(
-                      //   controlAffinity: ListTileControlAffinity.trailing,
-                      //   value: _con.filter?.delivery ?? false ? false : true,
-                      //   onChanged: (value) {
-                      //     setState(() {
-                      //       _con.filter?.delivery = false;
-                      //     });
-                      //   },
-                      //   title: Text(
-                      //     S.of(context).pickup,
-                      //     overflow: TextOverflow.fade,
-                      //     softWrap: false,
-                      //     maxLines: 1,
-                      //   ),
-                      // ),
-                    ],
-                    initiallyExpanded: true,
-                  ),
+                  // ExpansionTile(
+                  //   title: Text(S.of(context).delivery_or_pickup),
+                  //   children: [
+                  //     CheckboxListTile(
+                  //       controlAffinity: ListTileControlAffinity.trailing,
+                  //       value: _con.filter?.delivery ?? false ? false : true,
+                  //       onChanged: (value) {
+                  //         setState(() {
+                  //           _con.filter?.delivery = value;
+                  //         });
+                  //       },
+                  //       title: Text(
+                  //         S.of(context).delivery,
+                  //         overflow: TextOverflow.fade,
+                  //         softWrap: false,
+                  //         maxLines: 1,
+                  //       ),
+                  //     ),
+                  //     // CheckboxListTile(
+                  //     //   controlAffinity: ListTileControlAffinity.trailing,
+                  //     //   value: _con.filter?.delivery ?? false ? false : true,
+                  //     //   onChanged: (value) {
+                  //     //     setState(() {
+                  //     //       _con.filter?.delivery = false;
+                  //     //     });
+                  //     //   },
+                  //     //   title: Text(
+                  //     //     S.of(context).pickup,
+                  //     //     overflow: TextOverflow.fade,
+                  //     //     softWrap: false,
+                  //     //     maxLines: 1,
+                  //     //   ),
+                  //     // ),
+                  //   ],
+                  //   initiallyExpanded: true,
+                  // ),
                   ExpansionTile(
                     title: Text(S.of(context).opened_markets),
                     children: [

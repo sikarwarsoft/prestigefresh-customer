@@ -111,6 +111,18 @@ class _FavoritesWidgetState extends StateMVC<FavoritesWidget> {
                         ),
                       ),
                     ),
+                    (_con.favorites.isEmpty && _con.favorites.isEmpty)
+                        ?Column(
+                          children: [
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Center(
+                            child: Text(
+                                "you haven't added anything to favorites yet")),
+                          ],
+                        )
+                        :Container(),
                     _con.favorites.isEmpty
                         ? CircularLoadingWidget(height: 500)
                         : Offstage(
@@ -124,7 +136,13 @@ class _FavoritesWidgetState extends StateMVC<FavoritesWidget> {
                                 return SizedBox(height: 10);
                               },
                               itemBuilder: (context, index) {
-                                return FavoriteListItemWidget(
+                                print("sosos");
+                                print(_con.favorites.length);
+                                return (_con.favorites.length==0)?Container(
+                                  child: Text(
+                                    "show something"
+                                  ),
+                                ):FavoriteListItemWidget(
                                   heroTag: 'favorites_list',
                                   favorite: _con.favorites.elementAt(index),
                                 );
@@ -147,7 +165,13 @@ class _FavoritesWidgetState extends StateMVC<FavoritesWidget> {
                               crossAxisCount: MediaQuery.of(context).orientation == Orientation.portrait ? 2 : 4,
                               // Generate 100 widgets that display their index in the List.
                               children: List.generate(_con.favorites.length, (index) {
-                                return FavoriteGridItemWidget(
+                                print("favoriteva");
+                                print(_con.favorites.length);
+                                return (_con.favorites.length==0)?Container(
+                                  child: Text(
+                                      "show something"
+                                  ),
+                                ):FavoriteGridItemWidget(
                                   heroTag: 'favorites_grid',
                                   favorite: _con.favorites.elementAt(index),
                                 );

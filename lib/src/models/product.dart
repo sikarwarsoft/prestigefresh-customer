@@ -126,6 +126,7 @@ class Product {
   int get hashCode => this.id.hashCode;
 
   Coupon applyCoupon(Coupon coupon) {
+    print("applycoupon");
     if (coupon.code != '') {
       if (coupon.valid == null) {
         coupon.valid = false;
@@ -152,12 +153,13 @@ class Product {
   }
 
   Coupon _couponDiscountPrice(Coupon coupon) {
+    print("coupon discount price");
     coupon.valid = true;
     discountPrice = price;
     print((price * coupon.discount / 100));
     // print(double.parse(coupon.max_discount));
     if (coupon.discountType == 'fixed') {
-      price -= coupon.discount;
+      // price -= coupon.discount;
     } else {
       if ((price * coupon.discount / 100) < double.parse(coupon.max_discount)) {
         price = price;

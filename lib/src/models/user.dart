@@ -26,6 +26,7 @@ class User {
       id = jsonMap['id'].toString();
       name = jsonMap['name'] != null ? jsonMap['name'] : '';
       email = jsonMap['email'] != null ? jsonMap['email'] : '';
+      phone = jsonMap['mobile_number'] != null ? jsonMap['mobile_number'] : "";
       apiToken = jsonMap['api_token'];
       deviceToken = jsonMap['device_token'];
       try {
@@ -38,11 +39,11 @@ class User {
       } catch (e) {
         reffer = "";
       }
-      try {
-        phone = jsonMap['custom_fields']['phone']['view'];
-      } catch (e) {
-        phone = "";
-      }
+      // try {
+      //   phone = jsonMap['custom_fields']['phone']['view'];
+      // } catch (e) {
+      //   phone = "";
+      // }
       try {
         address = jsonMap['custom_fields']['address']['view'];
       } catch (e) {
@@ -71,7 +72,7 @@ class User {
     }
     map["ewallet_amount"] = wallet;
     map["user_refer_code"] = reffer;
-    map["phone"] = phone;
+    map["mobile_number"] = phone;
     map["address"] = address;
     map["bio"] = bio;
     map["media"] = image?.toMap();

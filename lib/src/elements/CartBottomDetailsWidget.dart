@@ -56,7 +56,7 @@ class CartBottomDetailsWidget extends StatelessWidget {
                       blurRadius: 5.0)
                 ]),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
@@ -73,7 +73,8 @@ class CartBottomDetailsWidget extends StatelessWidget {
                         coupon.valid ?? false
                             ? _con.dis > 0
                                 ? Text(
-                                    '₹ ${_con.subTotal + _con.dis}',
+                                    '₹ ${_con.subtotall}',
+                                    // '₹ ${_con.subTotal - _con.dis}',
                                     style: TextStyle(
                                       fontSize: 18.0,
                                       fontWeight: FontWeight.w500,
@@ -95,7 +96,7 @@ class CartBottomDetailsWidget extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: 5),
-                Row(
+                (_con.dis > 0)?Row(
                   children: <Widget>[
                     Expanded(
                       child: Text(
@@ -106,7 +107,8 @@ class CartBottomDetailsWidget extends StatelessWidget {
                     coupon.valid ?? false
                         ? _con.dis > 0
                             ? Text(
-                                '₹ ${_con.dis}',
+                                '-₹ ${_con.discount}',
+                                // '₹ ${_con.dis}',
                                 style:
                                     Theme.of(context).textTheme.subtitle1,
                               )
@@ -116,7 +118,7 @@ class CartBottomDetailsWidget extends StatelessWidget {
                         : Text('₹ 0',
                             style: Theme.of(context).textTheme.subtitle1),
                   ],
-                ),
+                ):SizedBox(height: 0,),
                 SizedBox(height: 5),
                 Row(
                   children: <Widget>[
@@ -129,7 +131,7 @@ class CartBottomDetailsWidget extends StatelessWidget {
                     if (Helper.canDelivery(_con.carts[0].product.market,
                         carts: _con.carts))
                       Text(
-                        '₹ ${_con.deliveryFee}',
+                        '₹ ${_con.deliveryFee.toStringAsFixed(0)}',
                         style: Theme.of(context).textTheme.subtitle1,
                       )
                     else
@@ -217,15 +219,42 @@ class CartBottomDetailsWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      // child: Helper.getPrice(_con.total, context,
-                      //     style: Theme.of(context).textTheme.headline4.merge(TextStyle(color: Theme.of(context).primaryColor)), zeroPlaceholder: 'Free'),
-                      child: Text(
-                        '₹ ${_con.total.toStringAsFixed(2)}',
-                        style: Theme.of(context).textTheme.headline4.merge(
-                            TextStyle(
-                                color: Theme.of(context).primaryColor)),
+                    InkWell(
+                      onTap: () {
+
+                        if (_isDeliveryPage) {
+                          if (Helper.canDelivery(
+                              _con.carts[0].product.market,
+                              carts: _con.carts)) {
+                            try {
+                              _con.goCheckout(context);
+                            } catch (e) {
+                              Fluttertoast.showToast(
+                                  msg: 'Please Select Delivery Address');
+                            }
+                          } else {
+                            Fluttertoast.showToast(
+                                msg: 'Please Select Delivery Address');
+                          }
+                        } else {
+                          try {
+                            _con.goCheckout(context);
+                          } catch (e) {
+                            Fluttertoast.showToast(
+                                msg: 'Please Select Delivery Address');
+                          }
+                        }
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        // child: Helper.getPrice(_con.total, context,
+                        //     style: Theme.of(context).textTheme.headline4.merge(TextStyle(color: Theme.of(context).primaryColor)), zeroPlaceholder: 'Free'),
+                        child: Text(
+                          '₹ ${_con.total.toStringAsFixed(2)}',
+                          style: Theme.of(context).textTheme.headline4.merge(
+                              TextStyle(
+                                  color: Theme.of(context).primaryColor)),
+                        ),
                       ),
                     )
                   ],

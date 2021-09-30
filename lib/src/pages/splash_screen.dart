@@ -70,11 +70,12 @@ class SplashScreenState extends StateMVC<SplashScreen> {
       });
       if (progress == 100) {
         try {
+          print("yaha se gaya");
           Navigator.of(context).pushReplacementNamed('/Pages', arguments: 2);
         } catch (e) {}
       }
     });
-    Future.delayed(Duration(seconds: 5)).then((value) {
+    Future.delayed(Duration(seconds: 2)).then((value) {
       print('feqfqwfwefewf');
       Navigator.of(context).pushReplacementNamed('/Pages', arguments: 2);
     });

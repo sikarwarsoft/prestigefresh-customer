@@ -294,7 +294,17 @@ class _SignUpWidgetState extends StateMVC<SignUpWidget> {
                       onPressed: () {
                         if (_key.currentState.validate()) {
                           _key.currentState.save();
-                          checkEmailExist();
+                          // checkEmailExist();
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => OTPScreen(
+                                  name: _nameController.text,
+                                  password: _passwordController.text,
+                                  email: _emailController.text,
+                                  mobileNumber: _phoneNumberController.text,
+                                ),
+                              ));
                         }
                       },
                     ),

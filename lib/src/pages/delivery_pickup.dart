@@ -428,8 +428,10 @@ class _DeliveryPickupWidgetState extends StateMVC<DeliveryPickupWidget> {
                                 msg:
                                     'Minimum order must be greater than ₹ ${Provider.of<CustomFieldsss>(context, listen: false).getMaxDiscountPrice}');
                             return;
+                          }else{
+                            _con.doApplyCoupon(couponValue);
                           }
-                          _con.doApplyCoupon(couponValue);
+
                         },
                         child: Container(
                             padding: EdgeInsets.all(8),

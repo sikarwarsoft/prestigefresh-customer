@@ -163,7 +163,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "orderThisorderidHasBeenCanceled" : m0,
     "order_id" : MessageLookupByLibrary.simpleMessage("Order Id"),
     "order_refreshed_successfuly" : MessageLookupByLibrary.simpleMessage("Order refreshed successfuly"),
-    "order_status_changed" : MessageLookupByLibrary.simpleMessage("Order status changed"),
+    "order_status_changed" : MessageLookupByLibrary.simpleMessage("Order status : "),
     "ordered_by_nearby_first" : MessageLookupByLibrary.simpleMessage("Ordered by Nearby first"),
     "orders_refreshed_successfuly" : MessageLookupByLibrary.simpleMessage("Orders refreshed successfuly"),
     "password" : MessageLookupByLibrary.simpleMessage("Password"),

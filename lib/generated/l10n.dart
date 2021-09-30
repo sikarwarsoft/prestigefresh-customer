@@ -1515,10 +1515,10 @@ class S {
     );
   }
 
-  /// `Order status changed`
+  /// `Order status : `
   String get order_status_changed {
     return Intl.message(
-      'Order status changed',
+      'Order status : ',
       name: 'order_status_changed',
       desc: '',
       args: [],
@@ -1538,7 +1538,7 @@ class S {
   /// `Shopping`
   String get shopping {
     return Intl.message(
-      'Shopping',
+      'Menu',
       name: 'shopping',
       desc: '',
       args: [],
@@ -2393,6 +2393,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
       Locale.fromSubtags(languageCode: 'ar'),
+      Locale.fromSubtags(languageCode: 'bn'),
       Locale.fromSubtags(languageCode: 'es'),
       Locale.fromSubtags(languageCode: 'fr'),
       Locale.fromSubtags(languageCode: 'fr', countryCode: 'CA'),

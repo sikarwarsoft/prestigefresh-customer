@@ -64,7 +64,10 @@ class NotificationItemWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               Text(
-                Helper.of(context).trans(notification.type),
+                // notification.data.toString(),
+                (notification.NotiData != null)
+                    ?Helper.of(context).trans(notification.type,notification.NotiData.status)
+                    :Helper.of(context).trans(notification.type,notification.NotiData2.status.status),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
                 style: Theme.of(context).textTheme.bodyText1,

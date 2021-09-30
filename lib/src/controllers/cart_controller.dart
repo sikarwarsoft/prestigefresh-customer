@@ -20,10 +20,12 @@ class CartController extends ControllerMVC {
   int cartCount = 0;
   double subTotal = 0.0;
   double total = 0.0;
+  double subtotall = 0.0;
   double dis = 0;
   double maxDiscount = 0;
   double tempSubTotal = 0;
   bool isLoading = false;
+  double discount = 0;
 
   GlobalKey<ScaffoldState> scaffoldKey;
 
@@ -32,12 +34,15 @@ class CartController extends ControllerMVC {
   }
 
   void listenForCarts({String message}) async {
+    print("listen for carts");
     carts.clear();
     final Stream<Cart> stream = await getCart();
     stream.listen((Cart _cart) {
+      print("stream listen");
       if (!carts.contains(_cart)) {
         setState(() {
           coupon = _cart.product.applyCoupon(coupon);
+          print("carttu" + _cart.product.price.toString());
           carts.add(_cart);
         });
       }
@@ -59,7 +64,9 @@ class CartController extends ControllerMVC {
     });
   }
 
-  void onLoadingCartDone() {}
+  void onLoadingCartDone() {
+
+  }
 
   void listenForCartsCount({String message}) async {
     final Stream<int> stream = await getCartCount();
@@ -99,16 +106,23 @@ class CartController extends ControllerMVC {
   void calculateSubtotal() async {
     double cartPrice = 0;
     subTotal = 0;
-    print("CartLength" + carts.length.toString());
+    print("CartLehhngth" + carts.length.toString());
     carts.forEach((cart) {
+      print(cart.product.price);
       cartPrice = cart.product.price;
       cart.options.forEach((element) {
-        cartPrice += element.price;
+        // cartPrice += element.price;
+        cartPrice = element.price + cartPrice;
       });
-      cartPrice *= cart.quantity;
+      // cartPrice *= cart.quantity;
+      cartPrice = cart.quantity * cartPrice;
+      print("cart quantity"+cart.quantity.toString());
       print("Cart Price" + cartPrice.toString());
-      subTotal += cartPrice;
+      // subTotal += cartPrice;
+      subTotal = cartPrice + subTotal;
+
     });
+    subtotall = subTotal;
     print("Subtotal From CART" + subTotal.toString());
     if (Helper.canDelivery(carts[0].product.market, carts: carts)) {
       deliveryFee = carts[0].product.market.deliveryFee;
@@ -125,6 +139,7 @@ class CartController extends ControllerMVC {
           print(maxDiscount);
           if ((dis * subTotal) / 100 < maxDiscount) {
             var discountt = (dis * subTotal) / 100;
+            discount = discountt;
             subTotal -= discountt;
             dis = maxDiscount;
             taxAmount = (subTotal + deliveryFee) *
@@ -150,10 +165,11 @@ class CartController extends ControllerMVC {
           if (dis > 0) {
             print('ewfewfwe' + ((dis).toString()));
             print(maxDiscount);
+            discount = dis;
             print("Subtotal" + subTotal.toString());
             if (dis < maxDiscount) {
               subTotal -= dis;
-
+              // subTotal -= discountt;
               taxAmount = (subTotal + deliveryFee) *
                   carts[0].product.market.defaultTax /
                   100;
@@ -182,6 +198,7 @@ class CartController extends ControllerMVC {
   }
 
   void doApplyCoupon(String code, {String message}) async {
+    print("do apply coupon");
     isLoading = true;
     setState(() {});
     coupon = new Coupon.fromJSON({"code": code, "valid": null});

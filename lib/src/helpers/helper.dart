@@ -363,10 +363,10 @@ class Helper {
     return Future.value(true);
   }
 
-  String trans(String text) {
+  String trans(String text,String status) {
     switch (text) {
       case "App\\Notifications\\StatusChangedOrder":
-        return S.of(context).order_status_changed;
+        return "${S.of(context).order_status_changed} $status";
       case "App\\Notifications\\NewOrder":
         return S.of(context).new_order_from_client;
       case "km":

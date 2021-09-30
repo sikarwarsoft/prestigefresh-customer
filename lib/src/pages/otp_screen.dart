@@ -128,6 +128,7 @@ class _OTPScreenState extends StateMVC<OTPScreen> {
                       GestureDetector(
                         onTap: () {
                           if (val.length == 6) {
+                            // _onVerifyCode();
                             _onFormSubmitted();
                           } else {
                             showToast("Invalid OTP", Colors.red);
@@ -175,6 +176,7 @@ class _OTPScreenState extends StateMVC<OTPScreen> {
   }
 
   void _onVerifyCode() async {
+    print("on varify code");
     setState(() {
       isCodeSent = true;
     });
@@ -188,7 +190,12 @@ class _OTPScreenState extends StateMVC<OTPScreen> {
           _con.user.password = widget.password;
           _con.user.email = widget.email;
           _con.user.phone = widget.mobileNumber;
-          _con.register();
+          _con.register().then((value) {
+            print("value"+value.toString());
+            if(value == false){
+              showToast("Soomthing went Wrong", Colors.red);
+            }
+          });
           // Navigator.pushAndRemoveUntil(
           //     context,
           //     MaterialPageRoute(
@@ -197,7 +204,7 @@ class _OTPScreenState extends StateMVC<OTPScreen> {
           //       // ),
           //     ),
           //         (Route<dynamic> route) => false);
-          Navigator.of(context).pushReplacementNamed('/Pages', arguments: 2);
+          // Navigator.of(context).pushReplacementNamed('/Pages', arguments: 2);
         } else {
           showToast("Error validating OTP, try again", Colors.red);
         }
@@ -259,8 +266,9 @@ class _OTPScreenState extends StateMVC<OTPScreen> {
       if (value.user != null) {
         // Handle loogged in state
         _con.register();
+        // _onVerifyCode();
         print(value.user.phoneNumber);
-        Navigator.of(context).pushReplacementNamed('/Pages', arguments: 2);
+        // Navigator.of(context).pushReplacementNamed('/Pages', arguments: 2);
         // Navigator.pushAndRemoveUntil(
         //     context,
         //     MaterialPageRoute(

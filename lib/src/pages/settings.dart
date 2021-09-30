@@ -247,24 +247,24 @@ class _SettingsWidgetState extends StateMVC<SettingsWidget> {
                                   color: Theme.of(context).focusColor),
                             ),
                           ),
-                          ListTile(
-                            onTap: () {},
-                            dense: true,
-                            title: Text(
-                              S.of(context).address,
-                              style: Theme.of(context).textTheme.bodyText2,
-                            ),
-                            trailing: Text(
-                              // _conn.addresses.elementAt(0).address
-                              // currentUser.value.address,
-                              Helper.limitString(currentUser.value.address.toString() ??
-                                  S.of(context).unknown),
-                              overflow: TextOverflow.fade,
-                              softWrap: false,
-                              style: TextStyle(
-                                  color: Theme.of(context).focusColor),
-                            ),
-                          ),
+                          // ListTile(
+                          //   onTap: () {},
+                          //   dense: true,
+                          //   title: Text(
+                          //     S.of(context).address,
+                          //     style: Theme.of(context).textTheme.bodyText2,
+                          //   ),
+                          //   trailing: Text(
+                          //     // _conn.addresses.elementAt(0).address
+                          //     // currentUser.value.address,
+                          //     Helper.limitString(currentUser.value.address.toString() ??
+                          //         S.of(context).unknown),
+                          //     overflow: TextOverflow.fade,
+                          //     softWrap: false,
+                          //     style: TextStyle(
+                          //         color: Theme.of(context).focusColor),
+                          //   ),
+                          // ),
                           // ListTile(
                           //   onTap: () {},
                           //   dense: true,
