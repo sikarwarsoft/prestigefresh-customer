@@ -52,15 +52,17 @@ Future<Setting> initSettings() async {
   return setting.value;
 }
 
-Future<dynamic> setCurrentLocation() async {
+Future<Address> setCurrentLocation() async {
   var location = new Location();
   MapsUtil mapsUtil = new MapsUtil();
   final whenDone = new Completer();
   Address _address = new Address();
   location.requestService().then((value) async {
     location.getLocation().then((_locationData) async {
+      print(_locationData.latitude);
       String _addressName = await mapsUtil.getAddressName(new LatLng(_locationData?.latitude, _locationData?.longitude), setting.value.googleMapsKey);
       _address = Address.fromJSON({'address': _addressName, 'latitude': _locationData?.latitude, 'longitude': _locationData?.longitude});
+      print(_address.toMap());
       await changeCurrentLocation(_address);
       whenDone.complete(_address);
     }).timeout(Duration(seconds: 10), onTimeout: () async {

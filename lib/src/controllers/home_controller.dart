@@ -98,7 +98,9 @@ class HomeController extends ControllerMVC {
   }
 
   void requestLoc() {
-    if (deliveryAddress.value != null && deliveryAddress.value.id != null) {
+    print(deliveryAddress.value.toMap());
+    if (!deliveryAddress.value.isUnknown()) {
+      print("deliveryAddress.value.toMap()");
       listenForTopMarkets();
       listenForSlides();
       listenForTrendingProducts();
@@ -109,6 +111,7 @@ class HomeController extends ControllerMVC {
     } else {
       setCurrentLocation().then((_address) async {
         deliveryAddress.value = _address;
+        print(deliveryAddress.value.toMap());
         listenForTopMarkets();
         listenForSlides();
         listenForTrendingProducts();
