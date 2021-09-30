@@ -109,6 +109,7 @@ class UserController extends ControllerMVC {
         print('i ma in');
         print(value);
         if (value != null && value.apiToken != null) {
+          loader.remove();
           _conAddress = DeliveryAddressesController();
 
           // LocationResult result = await showLocationPicker(

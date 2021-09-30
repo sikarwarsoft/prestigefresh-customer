@@ -1538,7 +1538,7 @@ class S {
   /// `Shopping`
   String get shopping {
     return Intl.message(
-      'Menu',
+      'Shopping',
       name: 'shopping',
       desc: '',
       args: [],
