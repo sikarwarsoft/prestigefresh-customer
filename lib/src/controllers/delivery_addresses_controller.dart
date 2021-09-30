@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:markets/src/repository/user_repository.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../generated/l10n.dart';
@@ -73,8 +74,11 @@ class DeliveryAddressesController extends ControllerMVC with ChangeNotifier {
   Future<void> changeDeliveryAddressToCurrentLocation() async {
     model.Address _address = await settingRepo.setCurrentLocation();
     setState(() {
+      print("addddd");
       settingRepo.deliveryAddress.value = _address;
       userRepo.currentUser.value.address = _address.address;
+      currentUser.value.address = _address.address;
+      print(_address.address);
     });
     settingRepo.deliveryAddress.notifyListeners();
     userRepo.currentUser.notifyListeners();
@@ -88,6 +92,9 @@ class DeliveryAddressesController extends ControllerMVC with ChangeNotifier {
     if (data != null) {
       setState(() {
         this.addresses.insert(0, address);
+        currentUser.value.address = addresses[0].address;
+        print("addaduu");
+        print(addresses[0].address);
       });
 
 

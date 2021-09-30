@@ -48,12 +48,24 @@ class ReviewItemWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Expanded(
-                          child: Text(
-                            review.user.name,
-                            overflow: TextOverflow.fade,
-                            softWrap: false,
-                            maxLines: 2,
-                            style: Theme.of(context).textTheme.headline6.merge(TextStyle(color: Theme.of(context).hintColor)),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                review.user.name,
+                                overflow: TextOverflow.fade,
+                                softWrap: false,
+                                maxLines: 2,
+                                style: Theme.of(context).textTheme.headline6.merge(TextStyle(color: Theme.of(context).hintColor)),
+                              ),
+                              Text(
+                                Helper.skipHtml(review.review),
+                                style: Theme.of(context).textTheme.bodyText2,
+                                overflow: TextOverflow.ellipsis,
+                                softWrap: false,
+                                maxLines: 3,
+                              )
+                            ],
                           ),
                         ),
                         SizedBox(
@@ -87,13 +99,7 @@ class ReviewItemWidget extends StatelessWidget {
               )
             ],
           ),
-          Text(
-            Helper.skipHtml(review.review),
-            style: Theme.of(context).textTheme.bodyText2,
-            overflow: TextOverflow.ellipsis,
-            softWrap: false,
-            maxLines: 3,
-          )
+
         ],
       ),
     );

@@ -141,8 +141,14 @@ Future<Stream<Address>> getAddresses() async {
   print(url);
   final client = new http.Client();
   final streamedRest = await client.send(http.Request('get', Uri.parse(url)));
+  print("addu");
+
+  print(currentUser.value.address);
 
   return streamedRest.stream.transform(utf8.decoder).transform(json.decoder).map((data) => Helper.getData(data)).expand((data) => (data as List)).map((data) {
+    var address = Address.fromJSON(data);
+    print(address.address);
+    currentUser.value.address = address.address;
     return Address.fromJSON(data);
   });
 }

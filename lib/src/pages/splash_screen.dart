@@ -95,7 +95,7 @@ class SplashScreenState extends StateMVC<SplashScreen> {
               children: <Widget>[
                 Image.asset(
                   'assets/img/logo_long.png',
-                  width: 450,
+                  width: 250,
                   fit: BoxFit.cover,
                 ),
                 SizedBox(height: 50),

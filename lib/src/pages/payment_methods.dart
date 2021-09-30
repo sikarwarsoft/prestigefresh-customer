@@ -33,7 +33,7 @@ class _PaymentMethodsWidgetState extends State<PaymentMethodsWidget> {
   bool isLoading = false;
   PaymentMethodList list;
   String id = '';
-  String wallet_amount = '';
+  String wallet_amount = '0';
   double total = 0;
   String option;
 
@@ -48,9 +48,11 @@ class _PaymentMethodsWidgetState extends State<PaymentMethodsWidget> {
       headers: {HttpHeaders.contentTypeHeader: 'application/json'},
       body: json.encode({'user_id': '$id'}),
     );
+    print("break here");
     final WalletDetail walletDetail = walletDetailFromJson(response.body);
+    print("wllll"+walletDetail.data.ewalletAmount.toString());
     setState(() {
-      wallet_amount = walletDetail.data.ewalletAmount.toString();
+      wallet_amount = walletDetail.data.ewalletAmount.toString() ?? "0";
     });
     print('resss' + walletDetail.data.email);
   }

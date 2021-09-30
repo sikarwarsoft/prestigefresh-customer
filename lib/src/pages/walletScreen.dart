@@ -113,8 +113,9 @@ class _WalletScreenState extends State<WalletScreen> {
                           'Add Money to Wallet',
                           style: TextStyle(
                               color: Theme.of(context).accentColor,
-                              fontSize: 32,
-                              fontWeight: FontWeight.w500),
+                              fontSize: 25,
+                              // fontWeight: FontWeight.w500
+                          ),
                         ),
                         SizedBox(
                           height: 8,
@@ -234,8 +235,9 @@ class _WalletScreenState extends State<WalletScreen> {
                           'Add Money to Wallet',
                           style: TextStyle(
                               color: Theme.of(context).accentColor,
-                              fontSize: 32,
-                              fontWeight: FontWeight.w500),
+                              fontSize: 25,
+                              // fontWeight: FontWeight.w500
+                          ),
                         ),
                         SizedBox(
                           height: 8,
@@ -246,7 +248,7 @@ class _WalletScreenState extends State<WalletScreen> {
                               'Available Balance',
                               style: TextStyle(
                                   color: Theme.of(context).accentColor,
-                                  fontSize: 18,
+                                  fontSize: 15,
                                   fontWeight: FontWeight.w500),
                             ),
                             SizedBox(
@@ -256,7 +258,7 @@ class _WalletScreenState extends State<WalletScreen> {
                               '₹ $amount',
                               style: TextStyle(
                                   color: Theme.of(context).accentColor,
-                                  fontSize: 18,
+                                  fontSize: 15,
                                   fontWeight: FontWeight.w500),
                             ),
                           ],
@@ -273,7 +275,7 @@ class _WalletScreenState extends State<WalletScreen> {
                       key: _key,
                       child: TextFormField(
                         style: TextStyle(
-                          fontSize: 32,
+                          fontSize: 25,
                         ),
                         keyboardType: TextInputType.number,
                         validator: (value) {
@@ -477,7 +479,7 @@ class _WalletScreenState extends State<WalletScreen> {
                                   'Available Balance',
                                   style: TextStyle(
                                       fontSize: 18,
-                                      fontWeight: FontWeight.w500,
+                                      // fontWeight: FontWeight.w500,
                                       color: Colors.white),
                                 ),
                                 SizedBox(
@@ -486,8 +488,8 @@ class _WalletScreenState extends State<WalletScreen> {
                                 Text(
                                   '  ₹ $amount',
                                   style: TextStyle(
-                                      fontSize: 32,
-                                      fontWeight: FontWeight.bold,
+                                      fontSize: 25,
+                                      // fontWeight: FontWeight.bold,
                                       color: Colors.white),
                                 ),
                               ],
@@ -510,7 +512,7 @@ class _WalletScreenState extends State<WalletScreen> {
                           decoration: BoxDecoration(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(16)),
-                              color: Colors.green.shade300),
+                              ),
                           padding: EdgeInsets.symmetric(
                               horizontal: 16, vertical: 16),
                           child: Column(
@@ -522,14 +524,17 @@ class _WalletScreenState extends State<WalletScreen> {
                                   Text(
                                     'Transactions',
                                     style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 32,
-                                        fontWeight: FontWeight.w600),
+                                        // color: Colors.white,
+                                        color: Colors.green.shade300,
+                                        fontSize: 25,
+                                        // fontWeight: FontWeight.w600
+                                    ),
                                   ),
                                   Icon(
                                     Icons.bar_chart,
-                                    color: Colors.white,
-                                    size: 40,
+                                    color: Colors.green.shade300,
+                                    // color: Colors.white,
+                                    size: 30,
                                   )
                                 ],
                               ),
@@ -544,18 +549,18 @@ class _WalletScreenState extends State<WalletScreen> {
                                             color: Colors.black),
                                         title: Text(
                                           '${llol[index].transactionType}',
-                                          style: TextStyle(color: Colors.white),
+                                          style: TextStyle(color: Colors.green.shade300,),
                                         ),
                                         subtitle: Text(
                                           '${llol[index].transactionId}',
                                           style: TextStyle(
-                                              color: Colors.white,
+                                              color: Colors.green.shade300,
                                               fontSize: 14),
                                         ),
                                         trailing: Text(
                                           '  ₹ ${llol[index].transactionAmount.toString()}',
                                           style: TextStyle(
-                                              color: Colors.white,
+                                              color: Colors.green.shade300,
                                               fontSize: 18),
                                         ),
                                       );

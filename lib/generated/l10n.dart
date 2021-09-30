@@ -9,42 +9,43 @@ import 'intl/messages_all.dart';
 // **************************************************************************
 
 // ignore_for_file: non_constant_identifier_names, lines_longer_than_80_chars
+// ignore_for_file: join_return_with_assignment, prefer_final_in_for_each
+// ignore_for_file: avoid_redundant_argument_values
 
 class S {
   S();
-
+  
   static S current;
-
-  static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
+  
+  static const AppLocalizationDelegate delegate =
+    AppLocalizationDelegate();
 
   static Future<S> load(Locale locale) {
-    final name = (locale.countryCode?.isEmpty ?? false)
-        ? locale.languageCode
-        : locale.toString();
-    final localeName = Intl.canonicalizedLocale(name);
+    final name = (locale.countryCode?.isEmpty ?? false) ? locale.languageCode : locale.toString();
+    final localeName = Intl.canonicalizedLocale(name); 
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
       S.current = S();
-
+      
       return S.current;
     });
-  }
+  } 
 
   static S of(BuildContext context) {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Search for markets or products`
+  /// `Search for restaurants or products`
   String get search_for_markets_or_products {
     return Intl.message(
-      'Search for restaurants or foods',
+      'Search for restaurants or products',
       name: 'search_for_markets_or_products',
       desc: '',
       args: [],
     );
   }
 
-  /// `Top Markets`
+  /// `Top Restaurants`
   String get top_markets {
     return Intl.message(
       'Top Restaurants',
@@ -74,7 +75,7 @@ class S {
     );
   }
 
-  /// `Product Categories`
+  /// `Food Categories`
   String get product_categories {
     return Intl.message(
       'Food Categories',
@@ -264,7 +265,7 @@ class S {
     );
   }
 
-  /// `Featured Products`
+  /// `Featured Foods`
   String get featured_products {
     return Intl.message(
       'Featured Foods',
@@ -284,7 +285,7 @@ class S {
     );
   }
 
-  /// `Favorite Products`
+  /// `Favorite Foods`
   String get favorite_products {
     return Intl.message(
       'Favorite Foods',
@@ -304,7 +305,7 @@ class S {
     );
   }
 
-  /// `Select options to add them on the product`
+  /// `Select options to add them on the food`
   String get select_options_to_add_them_on_the_product {
     return Intl.message(
       'Select options to add them on the food',
@@ -404,7 +405,7 @@ class S {
     );
   }
 
-  /// `All Products`
+  /// `All Foods`
   String get all_product {
     return Intl.message(
       'All Foods',
@@ -754,7 +755,7 @@ class S {
     );
   }
 
-  /// `You can discover markets & stores around you and choose you best meal after few minutes we prepare and deliver it for you`
+  /// `You can discover restaurants & stores around you and choose you best meal after few minutes we prepare and deliver it for you`
   String get you_can_discover_markets {
     return Intl.message(
       'You can discover restaurants & stores around you and choose you best meal after few minutes we prepare and deliver it for you',
@@ -824,17 +825,17 @@ class S {
     );
   }
 
-  /// `You must add products of the same markets choose one markets only!`
+  /// `You must add foods of the same markets choose one restaurants only!`
   String get you_must_add_products_of_the_same_markets_choose_one {
     return Intl.message(
-      'You must add products of the same restaurants choose one restaurants only!',
+      'You must add foods of the same markets choose one restaurants only!',
       name: 'you_must_add_products_of_the_same_markets_choose_one',
       desc: '',
       args: [],
     );
   }
 
-  /// `Reset your cart and order meals form this market`
+  /// `Reset your cart and order meals form this restaurant`
   String get reset_your_cart_and_order_meals_form_this_market {
     return Intl.message(
       'Reset your cart and order meals form this restaurant',
@@ -844,7 +845,7 @@ class S {
     );
   }
 
-  /// `Keep your old meals of this market`
+  /// `Keep your old meals of this restaurant`
   String get keep_your_old_meals_of_this_market {
     return Intl.message(
       'Keep your old meals of this restaurant',
@@ -1444,7 +1445,7 @@ class S {
     );
   }
 
-  /// `Tell us about this market`
+  /// `Tell us about this restaurant`
   String get tell_us_about_this_market {
     return Intl.message(
       'Tell us about this restaurant',
@@ -1454,7 +1455,7 @@ class S {
     );
   }
 
-  /// `How would you rate this market ?`
+  /// `How would you rate this restaurant ?`
   String get how_would_you_rate_this_market_ {
     return Intl.message(
       'How would you rate this restaurant ?',
@@ -1464,7 +1465,7 @@ class S {
     );
   }
 
-  /// `Tell us about this product`
+  /// `Tell us about this food`
   String get tell_us_about_this_product {
     return Intl.message(
       'Tell us about this food',
@@ -1474,7 +1475,7 @@ class S {
     );
   }
 
-  /// `The market has been rated successfully`
+  /// `The restaurant has been rated successfully`
   String get the_market_has_been_rated_successfully {
     return Intl.message(
       'The restaurant has been rated successfully',
@@ -1484,7 +1485,7 @@ class S {
     );
   }
 
-  /// `The product has been rated successfully`
+  /// `The food has been rated successfully`
   String get the_product_has_been_rated_successfully {
     return Intl.message(
       'The food has been rated successfully',
@@ -1547,7 +1548,7 @@ class S {
   /// `Delivery or Pickup`
   String get delivery_or_pickup {
     return Intl.message(
-      'Delivery',
+      'Delivery or Pickup',
       name: 'delivery_or_pickup',
       desc: '',
       args: [],
@@ -1598,7 +1599,7 @@ class S {
   String get delivery {
     return Intl.message(
       'Delivery',
-      // name: 'delivery',
+      name: 'delivery',
       desc: '',
       args: [],
     );
@@ -1694,7 +1695,7 @@ class S {
     );
   }
 
-  /// `Markets near to your current location`
+  /// `Restaurants near to your current location`
   String get markets_near_to_your_current_location {
     return Intl.message(
       'Restaurants near to your current location',
@@ -1704,7 +1705,7 @@ class S {
     );
   }
 
-  /// `Markets near to`
+  /// `Restaurants near to`
   String get markets_near_to {
     return Intl.message(
       'Restaurants near to',
@@ -1734,10 +1735,10 @@ class S {
     );
   }
 
-  /// `Pickup your product from the market`
+  /// `Pickup your food from the restaurant`
   String get pickup_your_product_from_the_market {
     return Intl.message(
-      'Pickup your product from the market',
+      'Pickup your food from the restaurant',
       name: 'pickup_your_product_from_the_market',
       desc: '',
       args: [],
@@ -1784,7 +1785,7 @@ class S {
     );
   }
 
-  /// `Opened Markets`
+  /// `Opened Restaurants`
   String get opened_markets {
     return Intl.message(
       'Opened Restaurants',
@@ -1804,7 +1805,7 @@ class S {
     );
   }
 
-  /// `This product was added to cart`
+  /// `This food was added to cart`
   String get this_product_was_added_to_cart {
     return Intl.message(
       'This food was added to cart',
@@ -1814,7 +1815,7 @@ class S {
     );
   }
 
-  /// `Products result`
+  /// `Foods result`
   String get products_result {
     return Intl.message(
       'Foods result',
@@ -1824,7 +1825,7 @@ class S {
     );
   }
 
-  /// `Products Results`
+  /// `Foods Results`
   String get products_results {
     return Intl.message(
       'Foods Results',
@@ -1834,7 +1835,7 @@ class S {
     );
   }
 
-  /// `Markets Results`
+  /// `Restaurants Results`
   String get markets_results {
     return Intl.message(
       'Restaurants Results',
@@ -1854,7 +1855,7 @@ class S {
     );
   }
 
-  /// `This market is closed !`
+  /// `This restaurant is closed !`
   String get this_market_is_closed_ {
     return Intl.message(
       'This restaurant is closed !',
@@ -1874,7 +1875,7 @@ class S {
     );
   }
 
-  /// `How would you rate this market ?`
+  /// `How would you rate this restaurant ?`
   String get how_would_you_rate_this_market {
     return Intl.message(
       'How would you rate this restaurant ?',
@@ -1949,16 +1950,6 @@ class S {
     return Intl.message(
       'Click to pay with your Visa Card',
       name: 'click_to_pay_with_your_visa_card',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Click to pay with your Wallet `
-  String get click_to_pay_with_your_wallet {
-    return Intl.message(
-      'Click to pay with your Wallet',
-      name: 'click_to_pay_with_your_wallet',
       desc: '',
       args: [],
     );
@@ -2104,7 +2095,7 @@ class S {
     );
   }
 
-  /// `Delivery address outside the delivery range of this markets.`
+  /// `Delivery address outside the delivery range of this restaurants.`
   String get deliveryAddressOutsideTheDeliveryRangeOfThisMarkets {
     return Intl.message(
       'Delivery address outside the delivery range of this restaurants.',
@@ -2114,17 +2105,17 @@ class S {
     );
   }
 
-  /// `This market not support delivery method.`
+  /// `This restaurant not support delivery method.`
   String get thisMarketNotSupportDeliveryMethod {
     return Intl.message(
-      'This restaurants not support delivery method.',
+      'This restaurant not support delivery method.',
       name: 'thisMarketNotSupportDeliveryMethod',
       desc: '',
       args: [],
     );
   }
 
-  /// `One or more products in your cart not deliverable.`
+  /// `One or more foods in your cart not deliverable.`
   String get oneOrMoreProductsInYourCartNotDeliverable {
     return Intl.message(
       'One or more foods in your cart not deliverable.',
@@ -2237,7 +2228,7 @@ class S {
   /// `Are you sure you want to cancel this order?`
   String get areYouSureYouWantToCancelThisOrder {
     return Intl.message(
-      'There shall be no refund upon cancellation. Would you still like to proceed with cancellation?',
+      'Are you sure you want to cancel this order?',
       name: 'areYouSureYouWantToCancelThisOrder',
       desc: '',
       args: [],
@@ -2254,7 +2245,7 @@ class S {
     );
   }
 
-  /// `Click on the product to get more details about it`
+  /// `Click on the food to get more details about it`
   String get clickOnTheProductToGetMoreDetailsAboutIt {
     return Intl.message(
       'Click on the food to get more details about it',
@@ -2294,7 +2285,7 @@ class S {
     );
   }
 
-  /// `This product was added to favorite`
+  /// `This food was added to favorite`
   String get thisProductWasAddedToFavorite {
     return Intl.message(
       'This food was added to favorite',
@@ -2304,7 +2295,7 @@ class S {
     );
   }
 
-  /// `This product was removed from favorites`
+  /// `This food was removed from favorites`
   String get thisProductWasRemovedFromFavorites {
     return Intl.message(
       'This food was removed from favorites',
@@ -2314,7 +2305,7 @@ class S {
     );
   }
 
-  /// `Product refreshed successfully`
+  /// `Food refreshed successfully`
   String get productRefreshedSuccessfuly {
     return Intl.message(
       'Food refreshed successfully',
@@ -2334,27 +2325,27 @@ class S {
     );
   }
 
-  /// `RazorPay`
+  /// ` upi/card/wallet/netbanking`
   String get razorpay {
     return Intl.message(
-      'RazorPay',
+      ' upi/card/wallet/netbanking',
       name: 'razorpay',
       desc: '',
       args: [],
     );
   }
 
-  /// `Click to pay with RazorPay method`
+  /// `Click to pay with online method`
   String get clickToPayWithRazorpayMethod {
     return Intl.message(
-      'Click to pay with RazorPay method',
+      'Click to pay with online method',
       name: 'clickToPayWithRazorpayMethod',
       desc: '',
       args: [],
     );
   }
 
-  /// `Products`
+  /// `Foods`
   String get products {
     return Intl.message(
       'Foods',
@@ -2407,7 +2398,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
       Locale.fromSubtags(languageCode: 'fr', countryCode: 'CA'),
       Locale.fromSubtags(languageCode: 'in'),
       Locale.fromSubtags(languageCode: 'ko'),
-      Locale.fromSubtags(languageCode: 'pt', countryCode: 'BR'),
+      Locale.fromSubtags(languageCode: 'pt'),
     ];
   }
 

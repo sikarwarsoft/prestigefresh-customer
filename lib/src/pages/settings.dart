@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:markets/src/controllers/delivery_addresses_controller.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../generated/l10n.dart';
@@ -8,7 +9,10 @@ import '../elements/PaymentSettingsDialog.dart';
 import '../elements/ProfileSettingsDialog.dart';
 import '../elements/SearchBarWidget.dart';
 import '../helpers/helper.dart';
+import '../models/user.dart';
 import '../repository/user_repository.dart';
+import 'reffer.dart';
+import 'walletScreen.dart';
 
 class SettingsWidget extends StatefulWidget {
   @override
@@ -17,9 +21,23 @@ class SettingsWidget extends StatefulWidget {
 
 class _SettingsWidgetState extends StateMVC<SettingsWidget> {
   SettingsController _con;
+  User _user;
+  DeliveryAddressesController _conn;
+
+  // _SettingsWidgetState()
+  //     : super(DeliveryAddressesController()) {
+  //   _conn = controller;
+  // }
 
   _SettingsWidgetState() : super(SettingsController()) {
     _con = controller;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _user = currentUser.value;
+    super.initState();
   }
 
   @override
@@ -111,7 +129,15 @@ class _SettingsWidgetState extends StateMVC<SettingsWidget> {
                         primary: false,
                         children: <Widget>[
                           ListTile(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => WalletScreen(
+                                        token: _user.apiToken,
+                                        id: _user.id,
+                                      )));
+                            },
                             dense: true,
                             title: Text(
                               'Wallet',
@@ -125,7 +151,10 @@ class _SettingsWidgetState extends StateMVC<SettingsWidget> {
                             ),
                           ),
                           ListTile(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                  context, MaterialPageRoute(builder: (context) => Reffer()));
+                            },
                             dense: true,
                             title: Text(
                               'Referal Code',
@@ -226,7 +255,9 @@ class _SettingsWidgetState extends StateMVC<SettingsWidget> {
                               style: Theme.of(context).textTheme.bodyText2,
                             ),
                             trailing: Text(
-                              Helper.limitString(currentUser.value.address ??
+                              // _conn.addresses.elementAt(0).address
+                              // currentUser.value.address,
+                              Helper.limitString(currentUser.value.address.toString() ??
                                   S.of(context).unknown),
                               overflow: TextOverflow.fade,
                               softWrap: false,

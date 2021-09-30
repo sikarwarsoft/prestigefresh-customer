@@ -20,7 +20,7 @@ class Coupon {
       discount = jsonMap['discount'] != null ? jsonMap['discount'].toDouble() : 0.0;
       discountType = jsonMap['discount_type'] != null ? jsonMap['discount_type'].toString() : null;
       discountables = jsonMap['discountables'] != null ? List.from(jsonMap['discountables']).map((element) => Discountable.fromJSON(element)).toList() : [];
-      max_discount = jsonMap['max_discount'].toString();
+      max_discount = (jsonMap['max_discount'] == null)?"0.0":jsonMap['max_discount'].toString();
       valid = jsonMap['valid'];
     } catch (e) {
       id = '';
