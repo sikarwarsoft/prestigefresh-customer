@@ -40,7 +40,7 @@ class _OrderSuccessWidgetState extends StateMVC<OrderSuccessWidget> {
     return WillPopScope(
       onWillPop: () async {
         print('i pressed');
-        Navigator.of(context)
+        (_con.loading)?null:Navigator.of(context)
             .pushNamed('/Pages', arguments: 3);
         return true;
       },
@@ -50,7 +50,7 @@ class _OrderSuccessWidgetState extends StateMVC<OrderSuccessWidget> {
             automaticallyImplyLeading: false,
             leading: IconButton(
               onPressed: () {
-                Navigator.of(context)
+                (_con.loading)?null:Navigator.of(context)
                     .pushNamed('/Pages', arguments: 3);
               },
               icon: Icon(Icons.arrow_back),
@@ -142,7 +142,7 @@ class _OrderSuccessWidgetState extends StateMVC<OrderSuccessWidget> {
                             ],
                           ),
                           SizedBox(height: 15),
-                          Opacity(
+                          (_con.loading)?Container():Opacity(
                             opacity: 0.4,
                             child: Text(
                               S
@@ -269,7 +269,7 @@ class _OrderSuccessWidgetState extends StateMVC<OrderSuccessWidget> {
                                 ],
                               ),
                               SizedBox(height: 20),
-                              SizedBox(
+                              (_con.loading)?Container():SizedBox(
                                 width: MediaQuery.of(context).size.width - 40,
                                 child: FlatButton(
                                   onPressed: () {
