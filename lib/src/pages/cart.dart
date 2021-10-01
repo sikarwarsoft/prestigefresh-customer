@@ -37,15 +37,26 @@ class _CartWidgetState extends StateMVC<CartWidget> {
     super.initState();
   }
 
+  Future<bool> _willPopCallback() async {
+    // await showDialog or Show add banners or whatever
+    // then
+    Navigator.pop(context);
+    return true; // return true if the route to be popped
+  }
+
+
   @override
   Widget build(BuildContext context) {
     print(_con.total);
     return WillPopScope(
-      onWillPop: Helper.of(context).onWillPop,
+      onWillPop:() => _willPopCallback(),
+      // onWillPop: Helper.of(context).onWillPop,
       child: Scaffold(
         key: _con.scaffoldKey,
-        bottomNavigationBar: CartBottomDetailsWidget(
+        bottomSheet: CartBottomDetailsWidget(
             con: _con, deliveryAllowed: true, isDeliveryPage: false),
+        // bottomNavigationBar: CartBottomDetailsWidget(
+        //     con: _con, deliveryAllowed: true, isDeliveryPage: false),
         appBar: AppBar(
           automaticallyImplyLeading: false,
           leading: IconButton(
