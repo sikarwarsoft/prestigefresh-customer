@@ -34,15 +34,12 @@ class CartController extends ControllerMVC {
   }
 
   void listenForCarts({String message}) async {
-    print("listen for carts");
     carts.clear();
     final Stream<Cart> stream = await getCart();
     stream.listen((Cart _cart) {
-      print("stream listen");
       if (!carts.contains(_cart)) {
         setState(() {
           coupon = _cart.product.applyCoupon(coupon);
-          print("carttu" + _cart.product.price.toString());
           carts.add(_cart);
         });
       }
@@ -106,9 +103,7 @@ class CartController extends ControllerMVC {
   void calculateSubtotal() async {
     double cartPrice = 0;
     subTotal = 0;
-    print("CartLehhngth" + carts.length.toString());
     carts.forEach((cart) {
-      print(cart.product.price);
       cartPrice = cart.product.price;
       cart.options.forEach((element) {
         // cartPrice += element.price;
@@ -116,8 +111,6 @@ class CartController extends ControllerMVC {
       });
       // cartPrice *= cart.quantity;
       cartPrice = cart.quantity * cartPrice;
-      print("cart quantity"+cart.quantity.toString());
-      print("Cart Price" + cartPrice.toString());
       // subTotal += cartPrice;
       subTotal = cartPrice + subTotal;
 
@@ -135,8 +128,6 @@ class CartController extends ControllerMVC {
     if (coupon.valid ?? false) {
       if (coupon.discountType == "percent") {
         if (dis > 0) {
-          print('ewfewfwe' + ((dis * subTotal) / 100).toString());
-          print(maxDiscount);
           if ((dis * subTotal) / 100 < maxDiscount) {
             var discountt = (dis * subTotal) / 100;
             discount = discountt;
@@ -147,26 +138,18 @@ class CartController extends ControllerMVC {
                 100;
             total = subTotal + taxAmount + deliveryFee;
           } else {
-            print('affsafsa00 Percent');
             subTotal -= maxDiscount;
             dis = maxDiscount;
             taxAmount = (subTotal + deliveryFee) *
                 carts[0].product.market.defaultTax /
                 100;
-            print(total);
-            print(subTotal);
-            print(taxAmount);
-            print(deliveryFee);
             total = subTotal + taxAmount + deliveryFee;
           }
         }
       } else {
         if (coupon.valid ?? false) {
           if (dis > 0) {
-            print('ewfewfwe' + ((dis).toString()));
-            print(maxDiscount);
             discount = dis;
-            print("Subtotal" + subTotal.toString());
             if (dis < maxDiscount) {
               subTotal -= dis;
               // subTotal -= discountt;
@@ -176,17 +159,10 @@ class CartController extends ControllerMVC {
               total = subTotal + taxAmount + deliveryFee;
             } else {
               dis = maxDiscount;
-              print('affsafsa00');
               subTotal -= dis;
-              print("Subtotal" + subTotal.toString());
-
               taxAmount = (subTotal + deliveryFee) *
                   carts[0].product.market.defaultTax /
                   100;
-              print(total);
-              print(subTotal);
-              print(taxAmount);
-              print(deliveryFee);
               total = subTotal + taxAmount + deliveryFee;
             }
           }
