@@ -23,6 +23,7 @@ class HomeController extends ControllerMVC {
   List<Product> trendingProducts = <Product>[];
 
   HomeController() {
+    print("beforeloc");
     requestLoc();
   }
 
@@ -98,6 +99,7 @@ class HomeController extends ControllerMVC {
   }
 
   void requestLoc() {
+    print("requestloc");
     print(deliveryAddress.value.toMap());
     if (!deliveryAddress.value.isUnknown()) {
       print("deliveryAddress.value.toMap()");
@@ -109,8 +111,11 @@ class HomeController extends ControllerMVC {
       listenForRecentReviews();
       listenForAllMarkets();
     } else {
+      print("elsel");
       setCurrentLocation().then((_address) async {
+        print("setcurrentlocation");
         deliveryAddress.value = _address;
+        print(deliveryAddress.value);
         print(deliveryAddress.value.toMap());
         listenForTopMarkets();
         listenForSlides();

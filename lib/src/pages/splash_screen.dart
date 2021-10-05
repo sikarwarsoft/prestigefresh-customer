@@ -77,7 +77,7 @@ class SplashScreenState extends StateMVC<SplashScreen> {
         } catch (e) {}
       }
     });
-    Future.delayed(Duration(seconds: 2)).then((value) {
+    Future.delayed(Duration(seconds: 3)).then((value) {
       print('feqfqwfwefewf');
       Navigator.of(context).pushReplacementNamed('/Pages', arguments: 2);
     });
