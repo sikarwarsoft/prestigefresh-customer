@@ -38,7 +38,8 @@ class _RazorPayPaymentWidgetState extends StateMVC<RazorPayPaymentWidget> {
         elevation: 0,
         centerTitle: true,
         title: Text(
-          S.of(context).razorpayPayment,
+          "Online Payment",
+          // S.of(context).razorpayPayment,
           style: Theme.of(context)
               .textTheme
               .headline6

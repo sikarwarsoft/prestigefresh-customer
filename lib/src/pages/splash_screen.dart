@@ -28,6 +28,8 @@ class SplashScreenState extends StateMVC<SplashScreen> {
   void initState() {
     super.initState();
     getRazorKey();
+    getReferalMoney();
+    loadData();
   }
 
   void getRazorKey() async {
@@ -41,7 +43,7 @@ class SplashScreenState extends StateMVC<SplashScreen> {
           .setKey(getRazorCred.data.key);
       Provider.of<CustomFieldsss>(context, listen: false)
           .setMaxCouponPrice(getRazorCred.data.max_coupon);
-      getReferalMoney();
+      // getReferalMoney();
     } else {
       Fluttertoast.showToast(msg: 'Please add RazorPay key');
     }
@@ -56,7 +58,7 @@ class SplashScreenState extends StateMVC<SplashScreen> {
       final getReferalAmount = getReferalAmountFromJson(res.body);
       Provider.of<CustomFieldsss>(context, listen: false)
           .setMoney(getReferalAmount.data);
-      loadData();
+      // loadData();
     }
     print(res.body);
   }
@@ -75,7 +77,7 @@ class SplashScreenState extends StateMVC<SplashScreen> {
         } catch (e) {}
       }
     });
-    Future.delayed(Duration(seconds: 2)).then((value) {
+    Future.delayed(Duration(seconds: 3)).then((value) {
       print('feqfqwfwefewf');
       Navigator.of(context).pushReplacementNamed('/Pages', arguments: 2);
     });

@@ -58,7 +58,8 @@ class _DetailsWidgetState extends StateMVC<DetailsWidget> {
             color: Theme.of(context).primaryColor,
           ),
           label: Text(
-            S.of(context).shopping,
+            "Menu",
+            // S.of(context).shopping,
             style: TextStyle(color: Theme.of(context).primaryColor),
           ),
         ),

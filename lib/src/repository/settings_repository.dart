@@ -53,14 +53,20 @@ Future<Setting> initSettings() async {
 }
 
 Future<Address> setCurrentLocation() async {
+  print("setcurrentlocatiom");
   var location = new Location();
   MapsUtil mapsUtil = new MapsUtil();
   final whenDone = new Completer();
   Address _address = new Address();
   location.requestService().then((value) async {
+    print("locationserrr");
     location.getLocation().then((_locationData) async {
+      print("getloco00");
       print(_locationData.latitude);
+      print(_locationData.toString());
       String _addressName = await mapsUtil.getAddressName(new LatLng(_locationData?.latitude, _locationData?.longitude), setting.value.googleMapsKey);
+      print("addrename");
+      print(_addressName);
       _address = Address.fromJSON({'address': _addressName, 'latitude': _locationData?.latitude, 'longitude': _locationData?.longitude});
       print(_address.toMap());
       await changeCurrentLocation(_address);
@@ -73,6 +79,10 @@ Future<Address> setCurrentLocation() async {
       whenDone.complete(_address);
     });
   });
+  print("location get0");
+  print(whenDone.isCompleted);
+  print(_address);
+  // return _address;
   return whenDone.future;
 }
 
