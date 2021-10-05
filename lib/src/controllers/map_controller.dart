@@ -92,11 +92,11 @@ class MapController extends ControllerMVC {
 
     sett.setCurrentLocation().then((_currentAddress) {
       setState(() {
-        sett.deliveryAddress.value = _currentAddress;
-        currentAddress = _currentAddress;
+
+        currentAddress = sett.deliveryAddress.value;
       });
       controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-        target: LatLng(_currentAddress.latitude, _currentAddress.longitude),
+        target: LatLng(currentAddress.latitude, currentAddress.longitude),
         zoom: 14.4746,
       )));
     });

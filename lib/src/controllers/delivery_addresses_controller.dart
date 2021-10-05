@@ -72,7 +72,8 @@ class DeliveryAddressesController extends ControllerMVC with ChangeNotifier {
   }
 
   Future<void> changeDeliveryAddressToCurrentLocation() async {
-    model.Address _address = await settingRepo.setCurrentLocation();
+    await settingRepo.setCurrentLocation();
+    model.Address _address = settingRepo.deliveryAddress.value;
     setState(() {
       print("addddd");
       settingRepo.deliveryAddress.value = _address;
@@ -96,8 +97,6 @@ class DeliveryAddressesController extends ControllerMVC with ChangeNotifier {
         print("addaduu");
         print(addresses[0].address);
       });
-
-
 
       return address;
     } else {

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:location/location.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../helpers/helper.dart';
@@ -90,7 +91,7 @@ class HomeController extends ControllerMVC {
     OverlayEntry loader = Helper.overlayLoader(context);
     Overlay.of(context).insert(loader);
     setCurrentLocation().then((_address) async {
-      deliveryAddress.value = _address;
+      deliveryAddress.notifyListeners();
       await refreshHome();
       loader.remove();
     }).catchError((e) {
@@ -98,8 +99,11 @@ class HomeController extends ControllerMVC {
     });
   }
 
-  void requestLoc() {
+  Future<void> requestLoc() async {
     print("requestloc");
+    var location = Location();
+    await location.requestPermission();
+    setState(() {});
     print(deliveryAddress.value.toMap());
     if (!deliveryAddress.value.isUnknown()) {
       print("deliveryAddress.value.toMap()");
@@ -111,10 +115,12 @@ class HomeController extends ControllerMVC {
       listenForRecentReviews();
       listenForAllMarkets();
     } else {
-      print("elsel");
+      print("else");
       setCurrentLocation().then((_address) async {
         print("setcurrentlocation");
-        deliveryAddress.value = _address;
+        setState(() {});
+
+        // setState(() {});
         print(deliveryAddress.value);
         print(deliveryAddress.value.toMap());
         listenForTopMarkets();
@@ -124,11 +130,13 @@ class HomeController extends ControllerMVC {
         listenForPopularMarkets();
         listenForRecentReviews();
         listenForAllMarkets();
+        // refreshHome();
       }).catchError((e) {});
     }
   }
 
   Future<void> refreshHome() async {
+    print("refresh");
     setState(() {
       slides = <Slide>[];
       categories = <Category>[];
