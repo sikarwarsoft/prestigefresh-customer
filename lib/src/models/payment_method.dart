@@ -24,7 +24,8 @@ class PaymentMethodList {
     this._paymentsList = [
       new PaymentMethod("visacard", S.of(_context).visa_card, S.of(_context).click_to_pay_with_your_visa_card, "/Checkout", "assets/img/visacard.png", isDefault: true),
       new PaymentMethod("mastercard", S.of(_context).mastercard, S.of(_context).click_to_pay_with_your_mastercard, "/Checkout", "assets/img/mastercard.png"),
-      new PaymentMethod("razorpay", S.of(_context).razorpay, S.of(_context).clickToPayWithRazorpayMethod, "/RazorPay", "assets/img/razorpay.png"),
+      // new PaymentMethod("razorpay", "S.of(_context).razorpay", S.of(_context).clickToPayWithRazorpayMethod, "/RazorPay", "assets/img/razorpay.png"),
+      new PaymentMethod("razorpay", "Upi/Card/Netbanking", S.of(_context).clickToPayWithRazorpayMethod, "/RazorPay", "assets/img/razorpay.png"),
       // new PaymentMethod("Wallet",'Wallet', S.of(_context).click_to_pay_with_your_wallet, "/RazorPay", "assets/img/wallet.png"),
       // new PaymentMethod("paypal", S.of(_context).paypal, S.of(_context).click_to_pay_with_your_paypal_account, "/PayPal", "assets/img/paypal.png"),
     ];

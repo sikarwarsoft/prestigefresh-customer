@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:markets/src/models/total_provider.dart';
-import 'package:markets/src/pages/orders.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:provider/provider.dart';
 
@@ -40,8 +39,9 @@ class _OrderSuccessWidgetState extends StateMVC<OrderSuccessWidget> {
     return WillPopScope(
       onWillPop: () async {
         print('i pressed');
-        Navigator.of(context)
-            .pushNamed('/Pages', arguments: 3);
+        (_con.loading)
+            ? null
+            : Navigator.of(context).pushNamed('/Pages', arguments: 3);
         return true;
       },
       child: Scaffold(
@@ -50,8 +50,9 @@ class _OrderSuccessWidgetState extends StateMVC<OrderSuccessWidget> {
             automaticallyImplyLeading: false,
             leading: IconButton(
               onPressed: () {
-                Navigator.of(context)
-                    .pushNamed('/Pages', arguments: 3);
+                (_con.loading)
+                    ? null
+                    : Navigator.of(context).pushNamed('/Pages', arguments: 3);
               },
               icon: Icon(Icons.arrow_back),
               color: Theme.of(context).hintColor,
@@ -142,20 +143,22 @@ class _OrderSuccessWidgetState extends StateMVC<OrderSuccessWidget> {
                             ],
                           ),
                           SizedBox(height: 15),
-                          Opacity(
-                            opacity: 0.4,
-                            child: Text(
-                              S
-                                  .of(context)
-                                  .your_order_has_been_successfully_submitted,
-                              textAlign: TextAlign.center,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline3
-                                  .merge(
-                                      TextStyle(fontWeight: FontWeight.w300)),
-                            ),
-                          ),
+                          (_con.loading)
+                              ? Container()
+                              : Opacity(
+                                  opacity: 0.4,
+                                  child: Text(
+                                    S
+                                        .of(context)
+                                        .your_order_has_been_successfully_submitted,
+                                    textAlign: TextAlign.center,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline3
+                                        .merge(TextStyle(
+                                            fontWeight: FontWeight.w300)),
+                                  ),
+                                ),
                         ],
                       ),
                     ),
@@ -269,24 +272,30 @@ class _OrderSuccessWidgetState extends StateMVC<OrderSuccessWidget> {
                                 ],
                               ),
                               SizedBox(height: 20),
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width - 40,
-                                child: FlatButton(
-                                  onPressed: () {
-                                    Navigator.of(context)
-                                        .pushNamed('/Pages', arguments: 3);
-                                  },
-                                  padding: EdgeInsets.symmetric(vertical: 14),
-                                  color: Theme.of(context).accentColor,
-                                  shape: StadiumBorder(),
-                                  child: Text(
-                                    S.of(context).my_orders,
-                                    textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                        color: Theme.of(context).primaryColor),
-                                  ),
-                                ),
-                              ),
+                              (_con.loading)
+                                  ? Container()
+                                  : SizedBox(
+                                      width: MediaQuery.of(context).size.width -
+                                          40,
+                                      child: FlatButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pushNamed(
+                                              '/Pages',
+                                              arguments: 3);
+                                        },
+                                        padding:
+                                            EdgeInsets.symmetric(vertical: 14),
+                                        color: Theme.of(context).accentColor,
+                                        shape: StadiumBorder(),
+                                        child: Text(
+                                          S.of(context).my_orders,
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                        ),
+                                      ),
+                                    ),
                               SizedBox(height: 10),
                             ],
                           ),

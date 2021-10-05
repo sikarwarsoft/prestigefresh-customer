@@ -16,7 +16,9 @@ class PaymentMethodListItemWidget extends StatelessWidget {
       focusColor: Theme.of(context).accentColor,
       highlightColor: Theme.of(context).primaryColor,
       onTap: () {
+        print("route");
         Navigator.of(context).pushNamed(this.paymentMethod.route);
+        print(paymentMethod.route);
         print(this.paymentMethod.name);
       },
       child: Container(
