@@ -102,6 +102,8 @@ class Order {
     var map = new Map<String, dynamic>();
     map["id"] = id;
     map["order_status_id"] = 5;
+    print("mapmap");
+    print(deliveryAddress?.id);
     if (deliveryAddress?.id != null && deliveryAddress?.id != 'null')
       map["delivery_address_id"] = deliveryAddress.id;
     return map;

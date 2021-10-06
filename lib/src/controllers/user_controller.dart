@@ -58,7 +58,7 @@ class UserController extends ControllerMVC {
             //resultCardAlignment: Alignment.bottomCenter,
           );
           print("result = $result");
-          if (result != null) {
+          if (result != null || result.latLng != null) {
             _conAddress
                 .addAddress(new Address.fromJSON({
               'address': result.address,
@@ -66,12 +66,14 @@ class UserController extends ControllerMVC {
               'longitude': result.latLng.longitude,
             }))
                 .then((value) async {
+              print("AAAAA"+value.toMap().toString());
               if (value != null) {
                 Overlay.of(context).insert(loader);
-                await _conAddress.chooseDeliveryAddress(value);;
+                deliveryAddress.value=value;
+                await _conAddress.chooseDeliveryAddress(value);
                 await _conAddress.changeDeliveryAddress(value);
                 loader.remove();
-                setState((){});
+                setState(() {});
                 Navigator.of(context)
                     .pushReplacementNamed('/Pages', arguments: 2);
               } else {
@@ -81,7 +83,7 @@ class UserController extends ControllerMVC {
               }
             });
           } else {
-            Navigator.of(context).pushReplacementNamed('/Pages', arguments: 2);
+           print("AAA");
           }
         } else {
           scaffoldKey?.currentState?.showSnackBar(SnackBar(
@@ -139,10 +141,11 @@ class UserController extends ControllerMVC {
                 .then((value) async {
               if (value != null) {
                 Overlay.of(context).insert(loader);
-                await _conAddress.chooseDeliveryAddress(value);;
+                await _conAddress.chooseDeliveryAddress(value);
+                ;
                 await _conAddress.changeDeliveryAddress(value);
                 loader.remove();
-                setState((){});
+                setState(() {});
                 Navigator.of(context)
                     .pushReplacementNamed('/Pages', arguments: 2);
               } else {

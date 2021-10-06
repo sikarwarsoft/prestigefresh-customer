@@ -91,14 +91,11 @@ class DeliveryAddressesController extends ControllerMVC with ChangeNotifier {
     var data = await userRepo.addAddress(address);
     print(data);
     if (data != null) {
-      setState(() {
-        this.addresses.insert(0, address);
-        currentUser.value.address = addresses[0].address;
-        print("addaduu");
-        print(addresses[0].address);
-      });
-
-      return address;
+      this.addresses.insert(0, data);
+      currentUser.value.address = addresses[0].address;
+      print("addaduu");
+      print(addresses[0].address);
+      return data;
     } else {
       return null;
     }

@@ -107,6 +107,7 @@ class HomeController extends ControllerMVC {
     print(deliveryAddress.value.toMap());
     if (!deliveryAddress.value.isUnknown()) {
       print("deliveryAddress.value.toMap()");
+      // changeCurrentLocation(deliveryAddress.value);
       listenForTopMarkets();
       listenForSlides();
       listenForTrendingProducts();

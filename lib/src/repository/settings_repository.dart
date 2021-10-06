@@ -143,7 +143,7 @@ Future<Address> changeCurrentLocation(Address _address) async {
     await prefs.setString('delivery_address', json.encode(_address.toMap()));
     await getCurrentLocation();
 
-    HomeController _ = HomeController();
+    // HomeController _ = HomeController();
 
     print("afeter shareed pref");
   }

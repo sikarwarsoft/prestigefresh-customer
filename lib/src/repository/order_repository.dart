@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:http/http.dart' as http;
 import 'package:markets/src/models/driver_details.dart';
+import '../repository/settings_repository.dart' as settingRepo;
 
 import '../helpers/custom_trace.dart';
 import '../helpers/helper.dart';
@@ -119,6 +120,12 @@ Future<Order> addOrder(Order order, Payment payment) async {
   print('my urll ' + url);
   final client = new http.Client();
   Map params = order.toMap();
+  print(order.id);
+  print(order.deliveryAddress.id);
+  print(settingRepo.deliveryAddress.value.id);
+  if(order.deliveryAddress.id == null){
+    order.deliveryAddress.id = settingRepo.deliveryAddress.value.id;
+  }
   print('my orderrr' + order.toMap().toString());
   params.addAll(_creditCard.toMap());
   print(params.toString());
