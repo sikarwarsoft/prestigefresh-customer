@@ -23,6 +23,8 @@ class Order {
   String order_status_id;
   String amount_by_wallet;
   String razorpay_payment_id;
+  String discount;
+  String discount_coupon;
 
   Order();
 
@@ -98,6 +100,8 @@ class Order {
     map["isWallet"] = isWallet;
     map["amount_by_wallet"] = amount_by_wallet;
     map["razorpay_payment_id"] = razorpay_payment_id;
+    map['discount'] = discount ;
+    map['discount_coupon'] = discount_coupon;
 
     return map;
   }

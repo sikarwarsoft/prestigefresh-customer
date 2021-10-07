@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:markets/src/controllers/checkout_controller.dart';
 import 'package:markets/src/models/route_argument.dart';
 import 'package:markets/src/models/total_provider.dart';
 import 'package:markets/src/pages/order_success.dart';
@@ -16,14 +17,17 @@ class CartBottomDetailsWidget extends StatelessWidget {
     @required CartController con,
     bool deliveryAllowed,
     bool isDeliveryPage,
+    CheckoutController checkoutCon,
   })  : _con = con,
         _deliveryAllowed = deliveryAllowed,
         _isDeliveryPage = isDeliveryPage,
+        _checkoutCon = checkoutCon,
         super(key: key);
 
   final CartController _con;
   final bool _deliveryAllowed;
   final bool _isDeliveryPage;
+  final CheckoutController _checkoutCon;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +42,9 @@ class CartBottomDetailsWidget extends StatelessWidget {
     );
     Provider.of<TotalProvider>(context, listen: false).setFinalTax(
       _con.taxAmount,
+    );
+    Provider.of<TotalProvider>(context, listen: false).setDiscount(
+      _con.discount,
     );
     return _con.carts.isEmpty
         ? SizedBox(height: 0)
@@ -177,6 +184,11 @@ class CartBottomDetailsWidget extends StatelessWidget {
                                     _con.carts[0].product.market,
                                     carts: _con.carts)) {
                                   try {
+                                    // _checkoutCon.payment.discount = _con.discount ?? "0";
+                                    Provider.of<TotalProvider>(context, listen: false)
+                                        .setDiscount(_con.discount);
+                                    Provider.of<TotalProvider>(context, listen: false)
+                                        .setDiscountCoupon(_con.discountCoupon);
                                     _con.goCheckout(context);
                                   } catch (e) {
                                     Fluttertoast.showToast(
@@ -188,6 +200,11 @@ class CartBottomDetailsWidget extends StatelessWidget {
                                 }
                               } else {
                                 try {
+                                  Provider.of<TotalProvider>(context, listen: false)
+                                      .setDiscount(_con.discount);
+                                  Provider.of<TotalProvider>(context, listen: false)
+                                      .setDiscountCoupon(_con.discountCoupon);
+                                  // _checkoutCon.payment.discount = _con.discount ?? "0";
                                   _con.goCheckout(context);
                                 } catch (e) {
                                   Fluttertoast.showToast(
@@ -238,6 +255,11 @@ class CartBottomDetailsWidget extends StatelessWidget {
                                   _con.carts[0].product.market,
                                   carts: _con.carts)) {
                                 try {
+                                  // _checkoutCon.payment.discount = _con.discount ?? "0";
+                                  Provider.of<TotalProvider>(context, listen: false)
+                                      .setDiscount(_con.discount);
+                                  Provider.of<TotalProvider>(context, listen: false)
+                                      .setDiscountCoupon(_con.discountCoupon);
                                   _con.goCheckout(context);
                                 } catch (e) {
                                   Fluttertoast.showToast(
@@ -249,6 +271,13 @@ class CartBottomDetailsWidget extends StatelessWidget {
                               }
                             } else {
                               try {
+                                print("trytry");
+                                // print(_con.discount);
+                                // _checkoutCon.payment.discount = _con.discount ?? "0";
+                                Provider.of<TotalProvider>(context, listen: false)
+                                    .setDiscount(_con.discount);
+                                Provider.of<TotalProvider>(context, listen: false)
+                                    .setDiscountCoupon(_con.discountCoupon);
                                 _con.goCheckout(context);
                               } catch (e) {
                                 Fluttertoast.showToast(

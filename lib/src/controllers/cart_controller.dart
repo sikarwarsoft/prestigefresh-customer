@@ -26,6 +26,7 @@ class CartController extends ControllerMVC {
   double tempSubTotal = 0;
   bool isLoading = false;
   double discount = 0;
+  String discountCoupon="";
 
   GlobalKey<ScaffoldState> scaffoldKey;
 
@@ -62,9 +63,7 @@ class CartController extends ControllerMVC {
     });
   }
 
-  void onLoadingCartDone() {
-
-  }
+  void onLoadingCartDone() {}
 
   void listenForCartsCount({String message}) async {
     final Stream<int> stream = await getCartCount();
@@ -114,7 +113,6 @@ class CartController extends ControllerMVC {
       cartPrice = cart.quantity * cartPrice;
       // subTotal += cartPrice;
       subTotal = cartPrice + subTotal;
-
     });
     subtotall = subTotal;
     print("Subtotal From CART" + subTotal.toString());
@@ -132,6 +130,8 @@ class CartController extends ControllerMVC {
           if ((dis * subTotal) / 100 < maxDiscount) {
             var discountt = (dis * subTotal) / 100;
             discount = discountt;
+
+
             subTotal -= discountt;
             dis = maxDiscount;
             taxAmount = (subTotal + deliveryFee) *
@@ -141,6 +141,8 @@ class CartController extends ControllerMVC {
           } else {
             subTotal -= maxDiscount;
             dis = maxDiscount;
+            discount = maxDiscount;
+
             taxAmount = (subTotal + deliveryFee) *
                 carts[0].product.market.defaultTax /
                 100;
@@ -150,8 +152,8 @@ class CartController extends ControllerMVC {
       } else {
         if (coupon.valid ?? false) {
           if (dis > 0) {
-            discount = dis;
             if (dis < maxDiscount) {
+              discount = dis;
               subTotal -= dis;
               // subTotal -= discountt;
               taxAmount = (subTotal + deliveryFee) *
@@ -160,6 +162,7 @@ class CartController extends ControllerMVC {
               total = subTotal + taxAmount + deliveryFee;
             } else {
               dis = maxDiscount;
+              discount = dis;
               subTotal -= dis;
               taxAmount = (subTotal + deliveryFee) *
                   carts[0].product.market.defaultTax /
@@ -169,7 +172,9 @@ class CartController extends ControllerMVC {
           }
         }
       }
+      discountCoupon=coupon.code;
     }
+    print("Doscount ON CALCULATION" + discount.toString());
 
     setState(() {});
   }
@@ -183,7 +188,8 @@ class CartController extends ControllerMVC {
     stream.listen((Coupon _coupon) async {
       coupon = _coupon;
       dis = _coupon.discount;
-      print("double value"+_coupon.max_discount.toString());
+      print(_coupon.discount);
+      print("double value" + _coupon.max_discount.toString());
       maxDiscount = double.parse(_coupon.max_discount.toString());
     }, onError: (a) {
       print(a);
@@ -213,8 +219,6 @@ class CartController extends ControllerMVC {
   }
 
   void goCheckout(BuildContext context) {
-
-
     if (carts[0].product.market.closed) {
       scaffoldKey?.currentState?.showSnackBar(SnackBar(
         content: Text(S.of(context).this_market_is_closed_),
@@ -222,7 +226,6 @@ class CartController extends ControllerMVC {
     } else {
       Navigator.of(context).pushNamed('/DeliveryPickup');
     }
-
   }
 
   Color getCouponIconColor() {

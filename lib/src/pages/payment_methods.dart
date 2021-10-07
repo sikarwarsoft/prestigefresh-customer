@@ -63,7 +63,7 @@ class _PaymentMethodsWidgetState extends StateMVC<PaymentMethodsWidget> {
     );
     print("break here");
     final WalletDetail walletDetail = walletDetailFromJson(response.body);
-    print("wllll"+walletDetail.data.ewalletAmount.toString());
+    print("wllll" + walletDetail.data.ewalletAmount.toString());
     setState(() {
       wallet_amount = walletDetail.data.ewalletAmount.toString() ?? "0";
     });
@@ -74,7 +74,8 @@ class _PaymentMethodsWidgetState extends StateMVC<PaymentMethodsWidget> {
     print(wallet_amount);
     print(double.parse(wallet_amount));
     if (double.parse(wallet_amount) > 0) {
-      if (double.parse(wallet_amount) >= total || double.parse(wallet_amount) > 0) {
+      if (double.parse(wallet_amount) >= total ||
+          double.parse(wallet_amount) > 0) {
         setState(() {
           isLoading = true;
         });
@@ -91,16 +92,20 @@ class _PaymentMethodsWidgetState extends StateMVC<PaymentMethodsWidget> {
         //   }),
         // );
         // print(response.statusCode);
-        if (double.parse(wallet_amount) > total) {
+        if (double.parse(wallet_amount) > (total- Provider.of<TotalProvider>(context, listen: false)
+            .getDiscount())) {
           Provider.of<CustomFieldsss>(context, listen: false).setIsWallet(1);
           await _con.listenForCarts();
           _con.payment = new Payment("online");
           _con.payment.method = "online";
           // _con.payment.id = response.paymentId;
-          _con.payment.walletAmmount = (double.parse(wallet_amount) > total)?total.toString():wallet_amount.toString();
-          _con.onLoadingCartDone();
-          Navigator.of(context)
-              .pushReplacementNamed('/Pages', arguments: 3);
+          _con.payment.walletAmmount = (double.parse(wallet_amount) > (total- Provider.of<TotalProvider>(context, listen: false)
+              .getDiscount()))
+              ? (total- Provider.of<TotalProvider>(context, listen: false)
+              .getDiscount()).toString()
+              : wallet_amount.toString();
+          await _con.onLoadingCartDone();
+          Navigator.of(context).pushReplacementNamed('/Pages', arguments: 3);
           setState(() {
             isLoading = false;
           });
@@ -141,6 +146,7 @@ class _PaymentMethodsWidgetState extends StateMVC<PaymentMethodsWidget> {
   }
 
   void openCheckout() async {
+    print("checkout payment online");
     // SharedPreferences pref = await SharedPreferences.getInstance();
     // var key = pref.getString("rzp_key");
     // if (key.isEmpty) {
@@ -151,9 +157,13 @@ class _PaymentMethodsWidgetState extends StateMVC<PaymentMethodsWidget> {
     // print("Razorpay: $key");
     final key = Provider.of<CustomFieldsss>(context, listen: false).getRazorKey;
     var options = {
-      'key': "rzp_test_1EQTOegNCPi1dg",
-      // 'key': '$key',
-      'amount': (total-double.parse(wallet_amount)) * 100,
+      // 'key': "rzp_test_1EQTOegNCPi1dg",
+      'key': '$key',
+      'amount': (total -
+              double.parse(wallet_amount) -
+              Provider.of<TotalProvider>(context, listen: false)
+                  .getDiscount()) *
+          100,
       'name': Constant.appName,
       'description': 'Wallet',
       'prefill': {
@@ -177,6 +187,8 @@ class _PaymentMethodsWidgetState extends StateMVC<PaymentMethodsWidget> {
     // TODO: implement initState
     option = Provider.of<SelectedOption>(context, listen: false).getOption();
     total = Provider.of<TotalProvider>(context, listen: false).getTotal();
+    // total = _con.total;
+    print(Provider.of<TotalProvider>(context, listen: false).getDiscount());
     id = Provider.of<UserDetails>(context, listen: false).userId;
 
     _razorpay = Razorpay();
@@ -187,16 +199,17 @@ class _PaymentMethodsWidgetState extends StateMVC<PaymentMethodsWidget> {
     super.initState();
   }
 
-  void _handlePaymentSuccess(PaymentSuccessResponse response) async{
+  void _handlePaymentSuccess(PaymentSuccessResponse response) async {
     print('done success');
     await _con.listenForCarts();
     _con.payment = new Payment("online");
     _con.payment.method = "online";
     _con.payment.id = response.paymentId;
-    _con.payment.walletAmmount = (double.parse(wallet_amount) > total)?total.toString():wallet_amount.toString();
-    _con.onLoadingCartDone();
-    Navigator.of(context)
-        .pushReplacementNamed('/Pages', arguments: 3);
+    _con.payment.walletAmmount = (double.parse(wallet_amount) > total)
+        ? total.toString()
+        : wallet_amount.toString();
+    await _con.onLoadingCartDone();
+    Navigator.of(context).pushReplacementNamed('/Pages', arguments: 3);
     // Get.to(orderSucess());
     //payment done
     //update on server
@@ -234,8 +247,7 @@ class _PaymentMethodsWidgetState extends StateMVC<PaymentMethodsWidget> {
   void _handlePaymentError(PaymentFailureResponse response) {
     print('done fail');
     //payment failed
-    Fluttertoast.showToast(
-        msg: 'response.message');
+    Fluttertoast.showToast(msg: 'response.message');
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
@@ -323,7 +335,11 @@ class _PaymentMethodsWidgetState extends StateMVC<PaymentMethodsWidget> {
                 },
                 itemBuilder: (context, index) {
                   return PaymentMethodListItemWidget(
-                      paymentMethod: list.paymentsList.elementAt(index));
+                    paymentMethod: list.paymentsList.elementAt(index),
+                    total: total,
+                    discount: Provider.of<TotalProvider>(context, listen: false)
+                        .getDiscount(),
+                  );
                 },
               ),
               SizedBox(
@@ -402,7 +418,7 @@ class _PaymentMethodsWidgetState extends StateMVC<PaymentMethodsWidget> {
                           textColor: Theme.of(context).primaryColor,
                           color: Theme.of(context).accentColor,
                           onPressed: () {
-                             // nkh;
+                            // nkh;
                             useWallet();
                           }),
                     ],
@@ -448,7 +464,12 @@ class _PaymentMethodsWidgetState extends StateMVC<PaymentMethodsWidget> {
                       },
                       itemBuilder: (context, index) {
                         return PaymentMethodListItemWidget(
-                            paymentMethod: list.cashList.elementAt(index));
+                          paymentMethod: list.cashList.elementAt(index),
+                          total: total,
+                          discount:
+                              Provider.of<TotalProvider>(context, listen: false)
+                                  .getDiscount(),
+                        );
                       },
                     )
                   : SizedBox()

@@ -4,6 +4,17 @@ class TotalProvider {
   String _method;
   double _subTotal;
   double _finalTax;
+  double _discount;
+  String _discountCoupon;
+
+  void setDiscount(double discount) {
+    _discount = discount;
+  }
+  void setDiscountCoupon(String discountCoupon) {
+    _discountCoupon = discountCoupon.toString();
+  }
+
+
 
   void setTotal(double total) {
     _total = total;
@@ -23,6 +34,14 @@ class TotalProvider {
 
   double getTotal() {
     return _total;
+  }
+
+  double getDiscount() {
+    return _discount;
+  }
+
+  String getDiscountCoupon() {
+    return _discountCoupon;
   }
 
   double getSubTotal() {

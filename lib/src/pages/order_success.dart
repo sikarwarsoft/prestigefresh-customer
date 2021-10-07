@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:markets/src/models/total_provider.dart';
+import 'package:markets/src/repository/settings_repository.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:provider/provider.dart';
 
@@ -165,7 +166,6 @@ class _OrderSuccessWidgetState extends StateMVC<OrderSuccessWidget> {
                     Positioned(
                       bottom: 0,
                       child: Container(
-                        height: 255,
                         padding:
                             EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                         decoration: BoxDecoration(
@@ -183,9 +183,10 @@ class _OrderSuccessWidgetState extends StateMVC<OrderSuccessWidget> {
                             ]),
                         child: SizedBox(
                           width: MediaQuery.of(context).size.width - 40,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.max,
+                          child: ListView(
+                            // crossAxisAlignment: CrossAxisAlignment.center,
+                            // mainAxisSize: MainAxisSize.max,
+                            shrinkWrap: true,
                             children: <Widget>[
                               Row(
                                 children: <Widget>[
@@ -205,6 +206,38 @@ class _OrderSuccessWidgetState extends StateMVC<OrderSuccessWidget> {
                                           Theme.of(context).textTheme.subtitle1)
                                 ],
                               ),
+                              (Provider.of<TotalProvider>(context,
+                                              listen: false)
+                                          .getDiscount() >
+                                      0)
+                                  ? Row(
+                                      children: <Widget>[
+                                        Expanded(
+                                          child: Text(
+                                            'Discount',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1,
+                                          ),
+                                        ),
+                                        Provider.of<TotalProvider>(context,
+                                                        listen: false)
+                                                    .getDiscount() >
+                                                0
+                                            ? Text(
+                                                '₹ ${Provider.of<TotalProvider>(context, listen: false).getDiscount()}',
+                                                // '₹ ${_con.dis}',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .subtitle1,
+                                              )
+                                            : Text('₹ 0',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .subtitle1)
+                                      ],
+                                    )
+                                  : Container(),
                               SizedBox(height: 3),
                               _con.payment.method == 'Pay on Pickup'
                                   ? SizedBox(height: 0)
@@ -254,21 +287,22 @@ class _OrderSuccessWidgetState extends StateMVC<OrderSuccessWidget> {
                                   ),
                                   _con.payment.method == 'Pay on Pickup'
                                       ? Helper.getPrice(
-                                          Provider.of<TotalProvider>(context,
-                                                  listen: false)
-                                              .getTotal(),
+                                          Provider.of<TotalProvider>(context, listen: false)
+                                                  .getTotal() -
+                                              Provider.of<TotalProvider>(context, listen: false)
+                                                  .getDiscount(),
                                           context,
                                           style: Theme.of(context)
                                               .textTheme
                                               .headline6)
                                       : Helper.getPrice(
-                                          Provider.of<TotalProvider>(context,
-                                                  listen: false)
-                                              .getTotal(),
+                                          (Provider.of<TotalProvider>(context, listen: false)
+                                                  .getTotal() -
+                                              Provider.of<TotalProvider>(context,
+                                                      listen: false)
+                                                  .getDiscount()),
                                           context,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headline6)
+                                          style: Theme.of(context).textTheme.headline6)
                                 ],
                               ),
                               SizedBox(height: 20),

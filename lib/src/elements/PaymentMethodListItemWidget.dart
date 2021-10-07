@@ -20,14 +20,20 @@ import 'package:razorpay_flutter/razorpay_flutter.dart';
 // ignore: must_be_immutable
 class PaymentMethodListItemWidget extends StatefulWidget {
   PaymentMethod paymentMethod;
+  double total;
+  double discount;
 
-  PaymentMethodListItemWidget({Key key, this.paymentMethod}) : super(key: key);
+  PaymentMethodListItemWidget(
+      {Key key, this.paymentMethod, this.total, this.discount})
+      : super(key: key);
 
   @override
-  _PaymentMethodListItemWidgetState createState() => _PaymentMethodListItemWidgetState();
+  _PaymentMethodListItemWidgetState createState() =>
+      _PaymentMethodListItemWidgetState();
 }
 
-class _PaymentMethodListItemWidgetState extends StateMVC<PaymentMethodListItemWidget> {
+class _PaymentMethodListItemWidgetState
+    extends StateMVC<PaymentMethodListItemWidget> {
   String heroTag;
   Razorpay _razorpay;
   CheckoutController _con;
@@ -39,8 +45,23 @@ class _PaymentMethodListItemWidgetState extends StateMVC<PaymentMethodListItemWi
   @override
   void initState() {
     // TODO: implement initState
-    print('dasdsadadasdassda'+Provider.of<TotalProvider>(context, listen: false).getTotal().toString());
-    print('dasdsadadasdassda'+Provider.of<TotalProvider>(context, listen: false).getDeliveryFee().toString());
+    print('dasdsadadasdassda' +
+        Provider.of<TotalProvider>(context, listen: false)
+            .getTotal()
+            .toString());
+    print('discount' +
+        Provider.of<TotalProvider>(context, listen: false)
+            .getDiscount()
+            .toString());
+    print('Dis' + widget.discount.toString());
+    print('Dis Coupon' +
+        Provider.of<TotalProvider>(context, listen: false)
+            .getDiscountCoupon()
+            .toString());
+    print('dasdsadadasdassda' +
+        Provider.of<TotalProvider>(context, listen: false)
+            .getDeliveryFee()
+            .toString());
 
     _razorpay = Razorpay();
     _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
@@ -50,6 +71,8 @@ class _PaymentMethodListItemWidgetState extends StateMVC<PaymentMethodListItemWi
   }
 
   void openCheckout() async {
+    print("rpayment");
+    //   print(_con.payment.discount_coupon);
     // SharedPreferences pref = await SharedPreferences.getInstance();
     // var key = pref.getString("rzp_key");
     // if (key.isEmpty) {
@@ -60,9 +83,12 @@ class _PaymentMethodListItemWidgetState extends StateMVC<PaymentMethodListItemWi
     // print("Razorpay: $key");
     final key = Provider.of<CustomFieldsss>(context, listen: false).getRazorKey;
     var options = {
-      'key': "rzp_test_1EQTOegNCPi1dg",
-      // 'key': '$key',
-      'amount': Provider.of<TotalProvider>(context, listen: false).getTotal() * 100,
+     // 'key': "rzp_test_1EQTOegNCPi1dg",
+      'key': '$key',
+      'amount': (Provider.of<TotalProvider>(context, listen: false).getTotal() -
+              Provider.of<TotalProvider>(context, listen: false)
+                  .getDiscount()) *
+          100,
       'name': Constant.appName,
       'description': 'Wallet',
       'prefill': {
@@ -87,9 +113,9 @@ class _PaymentMethodListItemWidgetState extends StateMVC<PaymentMethodListItemWi
     _con.payment = new Payment("online");
     _con.payment.method = "online";
     _con.payment.id = response.paymentId;
-    _con.onLoadingCartDone();
-    Navigator.of(context)
-        .pushReplacementNamed('/Pages', arguments: 3);
+    await _con.onLoadingCartDone();
+
+    Navigator.of(context).pushReplacementNamed('/Pages', arguments: 3);
     // Get.to(orderSucess());
     //payment done
     //update on server
@@ -127,8 +153,7 @@ class _PaymentMethodListItemWidgetState extends StateMVC<PaymentMethodListItemWi
   void _handlePaymentError(PaymentFailureResponse response) {
     print('done fail');
     //payment failed
-    Fluttertoast.showToast(
-        msg: response.message);
+    Fluttertoast.showToast(msg: response.message);
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
@@ -144,22 +169,24 @@ class _PaymentMethodListItemWidgetState extends StateMVC<PaymentMethodListItemWi
       focusColor: Theme.of(context).accentColor,
       highlightColor: Theme.of(context).primaryColor,
       onTap: () {
-        if(widget.paymentMethod.route == "/RazorPay"){
+        if (widget.paymentMethod.route == "/RazorPay") {
           openCheckout();
-        }else{
+        } else {
           print("route");
           Navigator.of(context).pushNamed(this.widget.paymentMethod.route);
           print(widget.paymentMethod.route);
           print(this.widget.paymentMethod.name);
         }
-
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
         decoration: BoxDecoration(
           color: Theme.of(context).primaryColor.withOpacity(0.9),
           boxShadow: [
-            BoxShadow(color: Theme.of(context).focusColor.withOpacity(0.1), blurRadius: 5, offset: Offset(0, 2)),
+            BoxShadow(
+                color: Theme.of(context).focusColor.withOpacity(0.1),
+                blurRadius: 5,
+                offset: Offset(0, 2)),
           ],
         ),
         child: Row(
@@ -170,7 +197,9 @@ class _PaymentMethodListItemWidgetState extends StateMVC<PaymentMethodListItemWi
               width: 60,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(5)),
-                image: DecorationImage(image: AssetImage(widget.paymentMethod.logo), fit: BoxFit.fill),
+                image: DecorationImage(
+                    image: AssetImage(widget.paymentMethod.logo),
+                    fit: BoxFit.fill),
               ),
             ),
             SizedBox(width: 15),

@@ -230,7 +230,8 @@ class _RefferState extends State<Reffer> {
               Container(
                 width: MediaQuery.of(context).size.width - 50,
                 child: Text(
-                  'Invite friend and both of you will get ₹${Provider.of<CustomFieldsss>(context, listen: false).getReferalMoney} on your wallet.',
+                  "Invite your friend and you and your friend will get ₹${Provider.of<CustomFieldsss>(context, listen: false).getReferalMoney} credited in your wallet on his/her first order",
+                  // 'Invite friend and both of you will get ₹${Provider.of<CustomFieldsss>(context, listen: false).getReferalMoney} on your wallet.',
                   textAlign: TextAlign.center,
                   // style: TextStyle(
                   //   fontSize: 22,

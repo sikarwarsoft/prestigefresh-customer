@@ -21,10 +21,12 @@ class CheckoutController extends CartController {
   Payment payment;
   CreditCard creditCard = new CreditCard();
   bool loading = true;
+  String discount_coupon = "";
 
   CheckoutController() {
     this.scaffoldKey = new GlobalKey<ScaffoldState>();
     listenForCreditCard();
+    print("MyDiscount"+dis.toString());
   }
 
   void listenForCreditCard() async {
@@ -75,6 +77,12 @@ class CheckoutController extends CartController {
     _order.hint = ' ';
     _order.isWallet =
         Provider.of<CustomFieldsss>(context, listen: false).getIswallet ?? 0;
+    _order.discount =Provider.of<TotalProvider>(context, listen: false)
+        .getDiscount()
+        .toString() ?? "0";
+    _order.discount_coupon = Provider.of<TotalProvider>(context, listen: false)
+        .getDiscountCoupon()
+        .toString() ?? "";
     carts.forEach((_cart) {
       ProductOrder _productOrder = new ProductOrder();
       _productOrder.quantity = _cart.quantity;
@@ -134,6 +142,12 @@ class CheckoutController extends CartController {
     // print("walletamm" + payment.walletAmmount);
     _order.amount_by_wallet =
         (payment.walletAmmount == "") ? "0" : payment.walletAmmount;
+    _order.discount =Provider.of<TotalProvider>(context, listen: false)
+        .getDiscount()
+        .toString() ?? "0";
+    _order.discount_coupon = Provider.of<TotalProvider>(context, listen: false)
+        .getDiscountCoupon()
+        .toString() ?? "";
     carts.forEach((_cart) {
       ProductOrder _productOrder = new ProductOrder();
       _productOrder.quantity = _cart.quantity;
@@ -150,9 +164,11 @@ class CheckoutController extends CartController {
     }).then((value) {
       print("valuell");
       print(value);
+
       // if(value != null){
       if (value is Order) {
         carts.clear();
+
         cartCount = 0;
         setState(() {
           loading = false;

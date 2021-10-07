@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:markets/src/controllers/checkout_controller.dart';
 import 'package:markets/src/elements/DeliveryAddressBottomSheetWidget.dart';
 import 'package:markets/src/models/custom_fieldsss.dart';
 import 'package:markets/src/models/selected_option.dart';
@@ -33,6 +34,8 @@ class DeliveryPickupWidget extends StatefulWidget {
 
 class _DeliveryPickupWidgetState extends StateMVC<DeliveryPickupWidget> {
   DeliveryPickupController _con;
+  CheckoutController _checkoutCon;
+
   String selectedOption = '';
   double deliveryFee = 0;
   double beforetax = 0;
@@ -68,6 +71,8 @@ class _DeliveryPickupWidgetState extends StateMVC<DeliveryPickupWidget> {
             100;
         _con.total = _con.subTotal + _con.deliveryFee + _con.taxAmount;
         Provider.of<TotalProvider>(context, listen: false).setTotal(_con.total);
+        Provider.of<TotalProvider>(context, listen: false)
+            .setDiscount(_con.discount);
       }
 
       Provider.of<SelectedOption>(context, listen: false).setOption('delivery');
@@ -85,8 +90,9 @@ class _DeliveryPickupWidgetState extends StateMVC<DeliveryPickupWidget> {
       key: _con.scaffoldKey,
       bottomNavigationBar: CartBottomDetailsWidget(
         con: _con,
-        deliveryAllowed:_con.deliveryAddress.address == null?false:true,
-        isDeliveryPage:true
+        deliveryAllowed: _con.deliveryAddress.address == null ? false : true,
+        isDeliveryPage: true,
+        checkoutCon: _checkoutCon,
       ),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -330,6 +336,8 @@ class _DeliveryPickupWidgetState extends StateMVC<DeliveryPickupWidget> {
                                     .setOption('delivery');
                                 _con.toggleDelivery();
                               }
+                              Provider.of<TotalProvider>(context, listen: false)
+                                  .setDiscount(_con.discount);
                             },
                             onLongPress: (Address _address) {
                               DeliveryAddressDialog(
@@ -428,10 +436,10 @@ class _DeliveryPickupWidgetState extends StateMVC<DeliveryPickupWidget> {
                                 msg:
                                     'Minimum order must be greater than ₹ ${Provider.of<CustomFieldsss>(context, listen: false).getMaxDiscountPrice}');
                             return;
-                          }else{
+                          } else {
                             _con.doApplyCoupon(couponValue);
+                            //_checkoutCon.payment.discount_coupon = couponValue;
                           }
-
                         },
                         child: Container(
                             padding: EdgeInsets.all(8),
