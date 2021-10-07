@@ -34,6 +34,7 @@ class CartController extends ControllerMVC {
   }
 
   void listenForCarts({String message}) async {
+    print("listen for carts");
     carts.clear();
     final Stream<Cart> stream = await getCart();
     stream.listen((Cart _cart) {

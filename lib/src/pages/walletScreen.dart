@@ -356,10 +356,12 @@ class _WalletScreenState extends State<WalletScreen> {
   }
 
   void openCheckout() async {
+    print("dlldld");
     final key = Provider.of<CustomFieldsss>(context, listen: false).getRazorKey;
     print('sdsadsdsadasdsa' + key);
     var options = {
-      'key': '$key',
+      'key': "rzp_test_1EQTOegNCPi1dg",
+      // 'key': '$key',
       'amount': int.parse(addAmount) * 100,
       'name': Constant.appName,
       'description': 'Wallet',

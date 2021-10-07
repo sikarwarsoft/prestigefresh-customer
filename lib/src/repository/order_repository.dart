@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:global_configuration/global_configuration.dart';
 import 'package:http/http.dart' as http;
+import 'package:markets/src/controllers/cart_controller.dart';
+import 'package:markets/src/controllers/order_controller.dart';
 import 'package:markets/src/models/driver_details.dart';
 import '../repository/settings_repository.dart' as settingRepo;
 
@@ -127,6 +129,41 @@ Future<Order> addOrder(Order order, Payment payment) async {
     order.deliveryAddress.id = settingRepo.deliveryAddress.value.id;
   }
   print('my orderrr' + order.toMap().toString());
+  params.addAll(_creditCard.toMap());
+  print(params.toString());
+  final response = await client.post(
+    url,
+    headers: {HttpHeaders.contentTypeHeader: 'application/json'},
+    body: json.encode(params),
+  );
+  print('aasfaf');
+  print('my res' + response.body);
+  // return Order.fromJSON(json.decode(response.body));
+  return Order.fromJSON(json.decode(response.body)['data']);
+}
+
+Future<Order> addOrderr(Order order, Payment payment) async {
+  User _user = userRepo.currentUser.value;
+  if (_user.apiToken == null) {
+    return new Order();
+  }
+  CreditCard _creditCard = await userRepo.getCreditCard();
+  order.user = _user;
+  order.payment = payment;
+  final String _apiToken = 'api_token=${_user.apiToken}';
+  final String url =
+      '${GlobalConfiguration().getString('api_base_url')}order/place?$_apiToken';
+  print('my urll ' + url);
+  final client = new http.Client();
+  Map params = order.toMap();
+  print(order.id);
+  print(order.deliveryAddress.id);
+  print(settingRepo.deliveryAddress.value.id);
+  if(order.deliveryAddress.id == null){
+    order.deliveryAddress.id = settingRepo.deliveryAddress.value.id;
+  }
+  print('my orderrr' + order.toMap().toString());
+
   params.addAll(_creditCard.toMap());
   print(params.toString());
   final response = await client.post(

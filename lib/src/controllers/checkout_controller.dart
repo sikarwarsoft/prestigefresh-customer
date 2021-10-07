@@ -34,7 +34,14 @@ class CheckoutController extends CartController {
 
   @override
   void onLoadingCartDone() {
-    if (payment != null) addOrder(carts);
+    if (payment != null || payment.id != null) {
+      if (payment.method != "online") {
+        addOrder(carts);
+      } else {
+        addOrderr();
+      }
+    }
+    // if (payment != null) addOrder(carts);
     super.onLoadingCartDone();
   }
 
@@ -75,7 +82,6 @@ class CheckoutController extends CartController {
       _productOrder.product = _cart.product;
       _productOrder.options = _cart.options;
       _order.productOrders.add(_productOrder);
-
     });
     orderRepo.addOrder(_order, this.payment).then((value) async {
       print("befvalue");
@@ -87,6 +93,67 @@ class CheckoutController extends CartController {
       print(value);
       // if(value != null){
       if (value is Order) {
+        setState(() {
+          loading = false;
+        });
+      }
+    });
+  }
+
+  void addOrderr() async {
+    print('lollllll' +
+        Provider.of<TotalProvider>(context, listen: false)
+            .getTotal()
+            .toString());
+    print('lollllll' +
+        Provider.of<TotalProvider>(context, listen: false)
+            .getSubTotal()
+            .toString());
+    print('lollllll' +
+        Provider.of<TotalProvider>(context, listen: false)
+            .getFinalTax()
+            .toString());
+    Order _order = new Order();
+    _order.productOrders = new List<ProductOrder>();
+    _order.tax = carts[0].product.market.defaultTax ?? 0.0;
+    _order.deliveryFee = (payment.method == 'Pay on Pickup')
+        ? 0
+        : carts[0].product.market.deliveryFee;
+    _order.total =
+        Provider.of<TotalProvider>(context, listen: false).getTotal();
+    _order.finalTax =
+        Provider.of<TotalProvider>(context, listen: false).getFinalTax();
+    OrderStatus _orderStatus = new OrderStatus();
+    _orderStatus.id = '1'; // TODO default order status Id
+    _order.orderStatus = _orderStatus;
+    _order.deliveryAddress = settingRepo.deliveryAddress.value;
+    _order.hint = ' ';
+    _order.isWallet =
+        Provider.of<CustomFieldsss>(context, listen: false).getIswallet ?? 0;
+    _order.razorpay_payment_id = payment.id;
+    // print("walletamm" + payment.walletAmmount);
+    _order.amount_by_wallet =
+        (payment.walletAmmount == "") ? "0" : payment.walletAmmount;
+    carts.forEach((_cart) {
+      ProductOrder _productOrder = new ProductOrder();
+      _productOrder.quantity = _cart.quantity;
+      _productOrder.price = _cart.product.price;
+      _productOrder.product = _cart.product;
+      _productOrder.options = _cart.options;
+      _order.productOrders.add(_productOrder);
+    });
+    orderRepo.addOrderr(_order, this.payment).then((value) async {
+      print("befvalue");
+      print(value);
+      settingRepo.coupon = new Coupon.fromJSON({});
+      return value;
+    }).then((value) {
+      print("valuell");
+      print(value);
+      // if(value != null){
+      if (value is Order) {
+        carts.clear();
+        cartCount = 0;
         setState(() {
           loading = false;
         });
