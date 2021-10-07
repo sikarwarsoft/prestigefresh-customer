@@ -21,6 +21,8 @@ class Order {
   double finalTax;
   int isWallet;
   String order_status_id;
+  String amount_by_wallet;
+  String razorpay_payment_id;
 
   Order();
 
@@ -94,6 +96,8 @@ class Order {
     map["delivery_address_id"] =
         deliveryAddress?.id == 'null' ? '24' : deliveryAddress?.id;
     map["isWallet"] = isWallet;
+    map["amount_by_wallet"] = amount_by_wallet;
+    map["razorpay_payment_id"] = razorpay_payment_id;
 
     return map;
   }
