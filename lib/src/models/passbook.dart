@@ -9,10 +9,9 @@ class PassBookDetails {
   String msg;
   Map<String, dynamic> data;
 
-  PassBookDetails.fromJson(Map<String,dynamic> jsonMap){
-    status = jsonMap['status'] !=null ? jsonMap['status']:'';
-    msg = jsonMap['msg'] != null ? jsonMap['msg']:'';
-    data = jsonMap['data'] !=null ? jsonMap['data']:'';
-
+  PassBookDetails.fromJson(Map<String, dynamic> jsonMap) {
+    status = jsonMap['status'] != null ? jsonMap['status'] : '';
+    msg = jsonMap['msg'] != null ? jsonMap['msg'] : '';
+    data = jsonMap['data'] != null ? jsonMap['data'] : '';
   }
 }
