@@ -78,9 +78,14 @@ class CheckoutController extends CartController {
 
     });
     orderRepo.addOrder(_order, this.payment).then((value) async {
+      print("befvalue");
+      print(value);
       settingRepo.coupon = new Coupon.fromJSON({});
       return value;
     }).then((value) {
+      print("valuell");
+      print(value);
+      // if(value != null){
       if (value is Order) {
         setState(() {
           loading = false;

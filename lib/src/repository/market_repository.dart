@@ -129,9 +129,13 @@ Future<Stream<Market>> searchMarkets(String search, Address address) async {
     _queryParams['areaLat'] = address.latitude.toString();
   }
   uri = uri.replace(queryParameters: _queryParams);
+  print("urlll");
+  print(uri);
   try {
     final client = new http.Client();
     final streamedRest = await client.send(http.Request('get', uri));
+    print("market serach response");
+    print(streamedRest.statusCode);
 
     return streamedRest.stream
         .transform(utf8.decoder)
