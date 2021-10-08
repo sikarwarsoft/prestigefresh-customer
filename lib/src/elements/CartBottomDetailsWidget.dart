@@ -189,6 +189,8 @@ class CartBottomDetailsWidget extends StatelessWidget {
                                         .setDiscount(_con.discount);
                                     Provider.of<TotalProvider>(context, listen: false)
                                         .setDiscountCoupon(_con.discountCoupon);
+                                    Provider.of<TotalProvider>(context, listen: false).setTotal(
+                                      _con.total,);
                                     _con.goCheckout(context);
                                   } catch (e) {
                                     Fluttertoast.showToast(
@@ -204,6 +206,8 @@ class CartBottomDetailsWidget extends StatelessWidget {
                                       .setDiscount(_con.discount);
                                   Provider.of<TotalProvider>(context, listen: false)
                                       .setDiscountCoupon(_con.discountCoupon);
+                                  Provider.of<TotalProvider>(context, listen: false).setTotal(
+                                    _con.total,);
                                   // _checkoutCon.payment.discount = _con.discount ?? "0";
                                   _con.goCheckout(context);
                                 } catch (e) {
@@ -260,6 +264,8 @@ class CartBottomDetailsWidget extends StatelessWidget {
                                       .setDiscount(_con.discount);
                                   Provider.of<TotalProvider>(context, listen: false)
                                       .setDiscountCoupon(_con.discountCoupon);
+                                  Provider.of<TotalProvider>(context, listen: false).setTotal(
+                                    _con.total,);
                                   _con.goCheckout(context);
                                 } catch (e) {
                                   Fluttertoast.showToast(
@@ -278,6 +284,8 @@ class CartBottomDetailsWidget extends StatelessWidget {
                                     .setDiscount(_con.discount);
                                 Provider.of<TotalProvider>(context, listen: false)
                                     .setDiscountCoupon(_con.discountCoupon);
+                                Provider.of<TotalProvider>(context, listen: false).setTotal(
+                                  _con.total,);
                                 _con.goCheckout(context);
                               } catch (e) {
                                 Fluttertoast.showToast(

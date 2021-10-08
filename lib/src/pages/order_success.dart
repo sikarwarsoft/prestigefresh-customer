@@ -200,7 +200,7 @@ class _OrderSuccessWidgetState extends StateMVC<OrderSuccessWidget> {
                                   Helper.getPrice(
                                       Provider.of<TotalProvider>(context,
                                               listen: false)
-                                          .getSubTotal(),
+                                          .getSubTotal() + Provider.of<TotalProvider>(context, listen: false).getDiscount(),
                                       context,
                                       style:
                                           Theme.of(context).textTheme.subtitle1)
@@ -297,10 +297,7 @@ class _OrderSuccessWidgetState extends StateMVC<OrderSuccessWidget> {
                                               .headline6)
                                       : Helper.getPrice(
                                           (Provider.of<TotalProvider>(context, listen: false)
-                                                  .getTotal() -
-                                              Provider.of<TotalProvider>(context,
-                                                      listen: false)
-                                                  .getDiscount()),
+                                                  .getTotal()),
                                           context,
                                           style: Theme.of(context).textTheme.headline6)
                                 ],

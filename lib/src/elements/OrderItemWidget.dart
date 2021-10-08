@@ -88,6 +88,21 @@ class _OrderItemWidgetState extends State<OrderItemWidget> {
                             EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                         child: Column(
                           children: <Widget>[
+                            (double.parse(widget.order.discount) > 0.0)?Row(
+                              children: <Widget>[
+                                Expanded(
+                                  child: Text(
+                                    "discount",
+                                    style:
+                                    Theme.of(context).textTheme.bodyText1,
+                                  ),
+                                ),
+                                Helper.getPrice(
+                                    double.parse(widget.order.discount), context,
+                                    style:
+                                    Theme.of(context).textTheme.subtitle1)
+                              ],
+                            ):Container(),
                             Row(
                               children: <Widget>[
                                 Expanded(

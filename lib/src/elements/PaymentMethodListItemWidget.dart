@@ -85,19 +85,20 @@ class _PaymentMethodListItemWidgetState
     var options = {
      // 'key': "rzp_test_1EQTOegNCPi1dg",
       'key': '$key',
-      'amount': (Provider.of<TotalProvider>(context, listen: false).getTotal() -
-              Provider.of<TotalProvider>(context, listen: false)
-                  .getDiscount()) *
-          100,
+      'amount': Provider.of<TotalProvider>(context, listen: false).getTotal()*100,
+      // 'amount': (Provider.of<TotalProvider>(context, listen: false).getTotal() -
+      //         Provider.of<TotalProvider>(context, listen: false)
+      //             .getDiscount()) *
+      //     100,
       'name': Constant.appName,
       'description': 'Wallet',
       'prefill': {
         'contact': '${currentUser.value.phone}',
         'email': '${currentUser.value.email}'
       },
-      'external': {
-        'wallets': ['paytm']
-      }
+      // 'external': {
+      //   'wallets': ['paytm']
+      // }
     };
 
     try {

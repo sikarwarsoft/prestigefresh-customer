@@ -35,6 +35,7 @@ Future<Stream<Order>> getOrders() async {
         .map((data) => Helper.getData(data))
         .expand((data) => (data as List))
         .map((data) {
+          print(data.toString());
       return Order.fromJSON(data);
     });
   } catch (e) {

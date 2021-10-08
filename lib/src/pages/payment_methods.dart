@@ -92,18 +92,22 @@ class _PaymentMethodsWidgetState extends StateMVC<PaymentMethodsWidget> {
         //   }),
         // );
         // print(response.statusCode);
-        if (double.parse(wallet_amount) > (total- Provider.of<TotalProvider>(context, listen: false)
-            .getDiscount())) {
+        if(double.parse(wallet_amount)>Provider.of<TotalProvider>(context, listen: false).getTotal()){
+        // if (double.parse(wallet_amount) > (total- Provider.of<TotalProvider>(context, listen: false)
+        //     .getDiscount())) {
           Provider.of<CustomFieldsss>(context, listen: false).setIsWallet(1);
           await _con.listenForCarts();
           _con.payment = new Payment("online");
           _con.payment.method = "online";
           // _con.payment.id = response.paymentId;
-          _con.payment.walletAmmount = (double.parse(wallet_amount) > (total- Provider.of<TotalProvider>(context, listen: false)
-              .getDiscount()))
-              ? (total- Provider.of<TotalProvider>(context, listen: false)
-              .getDiscount()).toString()
-              : wallet_amount.toString();
+          // _con.payment.walletAmmount = (double.parse(wallet_amount) > (total- Provider.of<TotalProvider>(context, listen: false)
+          //     .getDiscount()))
+          //     ? (total- Provider.of<TotalProvider>(context, listen: false)
+          //     .getDiscount()).toString()
+          //     : wallet_amount.toString();
+          _con.payment.walletAmmount = (double.parse(wallet_amount) > (Provider.of<TotalProvider>(context, listen: false).getTotal())
+              ? (Provider.of<TotalProvider>(context, listen: false).getTotal()).toString()
+              : wallet_amount.toString());
           await _con.onLoadingCartDone();
           Navigator.of(context).pushReplacementNamed('/Pages', arguments: 3);
           setState(() {
@@ -159,20 +163,21 @@ class _PaymentMethodsWidgetState extends StateMVC<PaymentMethodsWidget> {
     var options = {
       // 'key': "rzp_test_1EQTOegNCPi1dg",
       'key': '$key',
-      'amount': (total -
-              double.parse(wallet_amount) -
-              Provider.of<TotalProvider>(context, listen: false)
-                  .getDiscount()) *
-          100,
+      'amount': (Provider.of<TotalProvider>(context, listen: false).getTotal()- double.parse(wallet_amount)) *100,
+      // 'amount': (total -
+      //         double.parse(wallet_amount) -
+      //         Provider.of<TotalProvider>(context, listen: false)
+      //             .getDiscount()) *
+      //     100,
       'name': Constant.appName,
       'description': 'Wallet',
       'prefill': {
         'contact': '${currentUser.value.phone}',
         'email': '${currentUser.value.email}'
       },
-      'external': {
-        'wallets': ['paytm']
-      }
+      // 'external': {
+      //   'wallets': ['paytm']
+      // }
     };
 
     try {

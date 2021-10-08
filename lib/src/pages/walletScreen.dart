@@ -369,9 +369,9 @@ class _WalletScreenState extends State<WalletScreen> {
         'contact': '${currentUser.value.phone}',
         'email': '${currentUser.value.email}'
       },
-      'external': {
-        'wallets': ['paytm']
-      }
+      // 'external': {
+      //   'wallets': ['paytm']
+      // }
     };
 
     try {
@@ -383,6 +383,7 @@ class _WalletScreenState extends State<WalletScreen> {
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     print('done success');
+    print(response.paymentId);
     addMoney(int.parse(addAmount), 'RazorPay').then((value) {
       print('done done');
       Fluttertoast.showToast(

@@ -33,8 +33,9 @@ class Order {
       id = jsonMap['id'].toString();
       tax = jsonMap['tax'] != null ? jsonMap['tax'].toDouble() : 0.0;
       deliveryFee = jsonMap['delivery_fee'] != null
-          ? jsonMap['delivery_fee'].toDouble()
-          : 0.0;
+          ? jsonMap['delivery_fee'].toDouble():0.0;
+      discount = jsonMap['discount'] !=null ? jsonMap['discount'].toString() : "0";
+      discount_coupon = jsonMap["discount_coupon"]!=null ? jsonMap["discount_coupon"] : "";
       hint = jsonMap['hint'] != null ? jsonMap['hint'].toString() : '';
       active = jsonMap['active'] ?? false;
       orderStatus = jsonMap['order_status'] != null
