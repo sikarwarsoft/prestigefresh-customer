@@ -248,7 +248,8 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                             ),
                                     ),
                                     Expanded(child: SizedBox(height: 0)),
-                                    Container(
+                                    (_con.product.capacity != null && _con.product.unit != null && _con.product.capacity != "null" && _con.product.unit != "null")
+                                        ?Container(
                                         padding: EdgeInsets.symmetric(
                                             horizontal: 12, vertical: 3),
                                         decoration: BoxDecoration(
@@ -265,7 +266,8 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                               .merge(TextStyle(
                                                   color: Theme.of(context)
                                                       .primaryColor)),
-                                        )),
+                                        ))
+                                        :Container(),
                                     SizedBox(width: 5),
                                     Container(
                                         padding: EdgeInsets.symmetric(
@@ -449,7 +451,7 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                   Positioned(
                     bottom: 0,
                     child: Container(
-                      height: 150,
+                      // height: 150,
                       padding:
                           EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                       decoration: BoxDecoration(
@@ -467,11 +469,12 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                           ]),
                       child: SizedBox(
                         width: MediaQuery.of(context).size.width - 40,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.max,
+                        child: ListView(
+                          // crossAxisAlignment: CrossAxisAlignment.center,
+                          // mainAxisSize: MainAxisSize.max,
+                          shrinkWrap: true,
                           children: <Widget>[
-                            Row(
+                            (_con.product.deliverable)?Row(
                               children: <Widget>[
                                 Expanded(
                                   child: Text(
@@ -516,7 +519,7 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                   ],
                                 ),
                               ],
-                            ),
+                            ):Container(),
                             SizedBox(height: 10),
                             Row(
                               children: <Widget>[
@@ -560,7 +563,7 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                           )),
                                 ),
                                 SizedBox(width: 10),
-                                (int.parse(_con.product.packageItemsCount) > 0)
+                                (int.parse(_con.product.packageItemsCount) > 0 && _con.product.deliverable== true)
                                     ? Stack(
                                         fit: StackFit.loose,
                                         alignment:

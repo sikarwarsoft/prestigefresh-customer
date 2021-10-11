@@ -44,7 +44,8 @@ class Product {
       description = jsonMap['description'];
       capacity = jsonMap['capacity'].toString();
       unit = jsonMap['unit'] != null ? jsonMap['unit'].toString() : '';
-      packageItemsCount = jsonMap['package_items_count'].toString();
+      packageItemsCount = "100";
+      // packageItemsCount = jsonMap['package_items_count'].toString();
       featured = jsonMap['featured'] ?? false;
       deliverable = jsonMap['deliverable'] ?? false;
       market = jsonMap['market'] != null
