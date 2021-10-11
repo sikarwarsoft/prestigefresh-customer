@@ -68,6 +68,34 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
     }
   }
 
+  showAlertDialog(BuildContext context) {
+
+    // set up the button
+    Widget okButton = TextButton(
+      child: Text("OK"),
+      onPressed: () {
+        Navigator.pop(context);
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Alert"),
+      content: Text("You can add only ${_con.product.packageItemsCount} of this product"),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
   @override
   void initState() {
     _con.listenForProduct(productId: widget.routeArgument.id);
@@ -471,7 +499,13 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                             .subtitle1),
                                     IconButton(
                                       onPressed: () {
-                                        _con.incrementQuantity();
+                                        if(_con.quantity < int.parse(_con.product.packageItemsCount)){
+                                          _con.incrementQuantity();
+                                        }else{
+                                          print(int.parse(_con.product.packageItemsCount));
+                                          showAlertDialog(context);
+                                          print("out of stock");
+                                        }
                                       },
                                       iconSize: 30,
                                       padding: EdgeInsets.symmetric(
@@ -526,113 +560,154 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                           )),
                                 ),
                                 SizedBox(width: 10),
-                                Stack(
-                                  fit: StackFit.loose,
-                                  alignment: AlignmentDirectional.centerEnd,
-                                  children: <Widget>[
-                                    SizedBox(
-                                      width: MediaQuery.of(context).size.width -
-                                          110,
-                                      child: FlatButton(
-                                        onPressed: () {
-                                          if (currentUser.value.apiToken ==
-                                              null) {
-                                            Navigator.of(context)
-                                                .pushNamed("/Login");
-                                          } else {
-                                            if (_con
-                                                .isSameMarkets(_con.product)) {
-                                              _con.addToCart(_con.product);
-                                            } else {
-                                              showDialog(
-                                                context: context,
-                                                builder:
-                                                    (BuildContext context) {
-                                                  // return object of type Dialog
-                                                  return AddToCartAlertDialogWidget(
-                                                      oldProduct: _con.carts
-                                                          .elementAt(0)
-                                                          ?.product,
-                                                      newProduct: _con.product,
-                                                      onPressed: (product,
-                                                          {reset: true}) {
-                                                        return _con.addToCart(
-                                                            _con.product,
-                                                            reset: true);
-                                                      });
-                                                },
-                                              );
-                                            }
-                                          }
-                                        },
-                                        padding:
-                                            EdgeInsets.symmetric(vertical: 14),
-                                        color: Theme.of(context).accentColor,
-                                        shape: StadiumBorder(),
-                                        child: Container(
-                                          width: double.infinity,
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 20),
-                                          child: Text(
-                                            S.of(context).add_to_cart,
-                                            textAlign: TextAlign.start,
-                                            style: TextStyle(
-                                                color: Theme.of(context)
-                                                    .primaryColor),
+                                (int.parse(_con.product.packageItemsCount) > 0)
+                                    ? Stack(
+                                        fit: StackFit.loose,
+                                        alignment:
+                                            AlignmentDirectional.centerEnd,
+                                        children: <Widget>[
+                                          SizedBox(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width -
+                                                110,
+                                            child: FlatButton(
+                                              onPressed: () {
+                                                if (currentUser
+                                                        .value.apiToken ==
+                                                    null) {
+                                                  Navigator.of(context)
+                                                      .pushNamed("/Login");
+                                                } else {
+                                                  if (_con.isSameMarkets(
+                                                      _con.product)) {
+                                                    _con.addToCart(
+                                                        _con.product);
+                                                  } else {
+                                                    showDialog(
+                                                      context: context,
+                                                      builder: (BuildContext
+                                                          context) {
+                                                        // return object of type Dialog
+                                                        return AddToCartAlertDialogWidget(
+                                                            oldProduct: _con
+                                                                .carts
+                                                                .elementAt(0)
+                                                                ?.product,
+                                                            newProduct:
+                                                                _con.product,
+                                                            onPressed: (product,
+                                                                {reset: true}) {
+                                                              return _con
+                                                                  .addToCart(
+                                                                      _con
+                                                                          .product,
+                                                                      reset:
+                                                                          true);
+                                                            });
+                                                      },
+                                                    );
+                                                  }
+                                                }
+                                              },
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 14),
+                                              color:
+                                                  Theme.of(context).accentColor,
+                                              shape: StadiumBorder(),
+                                              child: Container(
+                                                width: double.infinity,
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 20),
+                                                child: Text(
+                                                  S.of(context).add_to_cart,
+                                                  textAlign: TextAlign.start,
+                                                  style: TextStyle(
+                                                      color: Theme.of(context)
+                                                          .primaryColor),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              if (currentUser.value.apiToken ==
+                                                  null) {
+                                                Navigator.of(context)
+                                                    .pushNamed("/Login");
+                                              } else {
+                                                if (_con.isSameMarkets(
+                                                    _con.product)) {
+                                                  _con.addToCart(_con.product);
+                                                } else {
+                                                  showDialog(
+                                                    context: context,
+                                                    builder:
+                                                        (BuildContext context) {
+                                                      // return object of type Dialog
+                                                      return AddToCartAlertDialogWidget(
+                                                          oldProduct: _con.carts
+                                                              .elementAt(0)
+                                                              ?.product,
+                                                          newProduct:
+                                                              _con.product,
+                                                          onPressed: (product,
+                                                              {reset: true}) {
+                                                            return _con
+                                                                .addToCart(
+                                                                    _con
+                                                                        .product,
+                                                                    reset:
+                                                                        true);
+                                                          });
+                                                    },
+                                                  );
+                                                }
+                                              }
+                                            },
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 20),
+                                              child: Helper.getPrice(
+                                                _con.total,
+                                                context,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .headline4
+                                                    .merge(TextStyle(
+                                                        color: Theme.of(context)
+                                                            .primaryColor)),
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      )
+                                    : SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width -
+                                                110,
+                                        child: FlatButton(
+                                          onPressed: () {},
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 14),
+                                          color: Theme.of(context).disabledColor,
+                                          shape: StadiumBorder(),
+                                          child: Container(
+                                            width: double.infinity,
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 20),
+                                            child: Text(
+                                              "Out of stock",
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                  color: Theme.of(context)
+                                                      .primaryColor),
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-
-                                        if (currentUser.value.apiToken ==
-                                            null) {
-                                          Navigator.of(context)
-                                              .pushNamed("/Login");
-                                        } else {
-                                          if (_con
-                                              .isSameMarkets(_con.product)) {
-                                            _con.addToCart(_con.product);
-                                          } else {
-                                            showDialog(
-                                              context: context,
-                                              builder:
-                                                  (BuildContext context) {
-                                                // return object of type Dialog
-                                                return AddToCartAlertDialogWidget(
-                                                    oldProduct: _con.carts
-                                                        .elementAt(0)
-                                                        ?.product,
-                                                    newProduct: _con.product,
-                                                    onPressed: (product,
-                                                        {reset: true}) {
-                                                      return _con.addToCart(
-                                                          _con.product,
-                                                          reset: true);
-                                                    });
-                                              },
-                                            );
-                                          }
-                                        }
-                                      },
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 20),
-                                        child: Helper.getPrice(
-                                          _con.total,
-                                          context,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headline4
-                                              .merge(TextStyle(
-                                                  color: Theme.of(context)
-                                                      .primaryColor)),
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
                               ],
                             ),
                             SizedBox(height: 10),

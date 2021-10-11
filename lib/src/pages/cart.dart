@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:markets/src/controllers/product_controller.dart';
 import 'package:markets/src/models/get_coupon.dart';
 import 'package:markets/src/models/total_provider.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
@@ -143,6 +144,14 @@ class _CartWidgetState extends StateMVC<CartWidget> {
                                 increment: () {
                                   _con.incrementQuantity(
                                       _con.carts.elementAt(index));
+                                  //
+                                  // if(_con.carts.elementAt(index).quantity < int.parse(_productController.product.packageItemsCount)){
+                                  //   _con.incrementQuantity(
+                                  //       _con.carts.elementAt(index));
+                                  // }else{
+                                  //   showAlertDialog(context);
+                                  // }
+
                                 },
                                 decrement: () {
                                   _con.decrementQuantity(

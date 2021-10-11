@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
@@ -64,6 +65,34 @@ class ProductController extends ControllerMVC {
     return true;
   }
 
+  showAlertDialog(BuildContext context) {
+    print("show dialog");
+    // set up the button
+    Widget okButton = TextButton(
+      child: Text("OK"),
+      onPressed: () {
+        Navigator.pop(context);
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Alert"),
+      content: Text("You can add only ${product.packageItemsCount} of this product"),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
   void addToCart(Product product, {bool reset = false}) async {
     setState(() {
       this.loadCart = true;
@@ -73,19 +102,57 @@ class ProductController extends ControllerMVC {
     _newCart.options = product.options.where((element) => element.checked).toList();
     _newCart.quantity = this.quantity;
     // if product exist in the cart then increment quantity
-    var _oldCart = isExistInCart(_newCart);
+    print("checkpoint");
+    Cart _oldCart;
+    Cart _tempCart;
+    for(int i=0;i<carts.length ; i++ ){
+      if(carts[i].product.id == _newCart.product.id){
+        print("check ke if me aaya");
+        setState((){
+          _oldCart = _newCart;
+          _tempCart = carts[i];
+        });
+        break;
+      }else{
+        _oldCart = null;
+      }
+    }
+    // Cart _oldCart = carts.firstWhere((Cart oldCart) {
+    //   if(_newCart.isSame(oldCart)){
+    //     return oldCart;
+    //   }else{
+    //     return null;
+    //   }
+    // });
+    // var _oldCart = isExistInCart(_newCart);
     if (_oldCart != null) {
-      _oldCart.quantity += this.quantity;
-      updateCart(_oldCart).then((value) {
+      if((_oldCart.quantity + _tempCart.quantity) <= int.parse(product.packageItemsCount)){
+        print(_oldCart.toMap());
+        print(_oldCart.quantity + _tempCart.quantity);
+        setState((){
+          _oldCart.quantity = _oldCart.quantity + _tempCart.quantity;
+          _oldCart.id = _tempCart.id;
+        });
+        print("ifme aaya");
+        updateCart(_oldCart).then((value) {
+          print("update cart");
+          setState(() {
+            this.loadCart = false;
+          });
+        }).whenComplete(() {
+          // showAlertDialog(context);
+          scaffoldKey?.currentState?.showSnackBar(SnackBar(
+            content: Text(S.of(context).this_product_was_added_to_cart),
+          ));
+        });
+      }else{
         setState(() {
           this.loadCart = false;
         });
-      }).whenComplete(() {
-        scaffoldKey?.currentState?.showSnackBar(SnackBar(
-          content: Text(S.of(context).this_product_was_added_to_cart),
-        ));
-      });
+        showAlertDialog(context);
+      }
     } else {
+      print("else me aaya");
       // the product doesnt exist in the cart add new one
       addCart(_newCart, reset).then((value) {
         setState(() {
@@ -100,7 +167,14 @@ class ProductController extends ControllerMVC {
   }
 
   Cart isExistInCart(Cart _cart) {
-    return carts.firstWhere((Cart oldCart) => _cart.isSame(oldCart), orElse: () => null);
+    carts.firstWhere((Cart oldCart) {
+      if(_cart.isSame(oldCart)){
+        return _cart.isSame(oldCart);
+      }else{
+        return null;
+      }
+    });
+    // return carts.firstWhere((Cart oldCart) => _cart.isSame(oldCart), orElse: () => null);
   }
 
   void addToFavorite(Product product) async {

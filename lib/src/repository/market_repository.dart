@@ -21,7 +21,7 @@ Future<Stream<Market>> getNearMarkets(
   Filter filter =
       Filter.fromJSON(json.decode(prefs.getString('filter') ?? '{}'));
 
-  _queryParams['limit'] = '10';
+  _queryParams['limit'] = '50';
   if (!myLocation.isUnknown() && !areaLocation.isUnknown()) {
     _queryParams['myLon'] = myLocation.longitude.toString();
     _queryParams['myLat'] = myLocation.latitude.toString();

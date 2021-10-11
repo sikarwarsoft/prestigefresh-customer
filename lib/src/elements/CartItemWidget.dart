@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:markets/src/controllers/product_controller.dart';
 
 import '../helpers/helper.dart';
 import '../models/cart.dart';
@@ -20,6 +21,41 @@ class CartItemWidget extends StatefulWidget {
 }
 
 class _CartItemWidgetState extends State<CartItemWidget> {
+
+  // @override
+  // void initState() {
+  //   _productController.listenForProduct(productId: widget.cart.product.packageItemsCount);
+  //   super.initState();
+  // }
+
+  showAlertDialog(BuildContext context) {
+    print("show dialog");
+    // set up the button
+    Widget okButton = TextButton(
+      child: Text("OK"),
+      onPressed: () {
+        Navigator.pop(context);
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Alert"),
+      content: Text("You can add only ${widget.cart.product.packageItemsCount} of this product"),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Dismissible(
@@ -107,9 +143,18 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                       children: <Widget>[
                         IconButton(
                           onPressed: () {
-                            setState(() {
-                              widget.increment();
-                            });
+
+                            // setState(() {
+                            //   widget.increment();
+                            // });
+
+                            if(widget.cart.quantity < int.parse(widget.cart.product.packageItemsCount)){
+                              setState(() {
+                                widget.increment();
+                              });
+                            }else{
+                              showAlertDialog(context);
+                            }
                           },
                           iconSize: 30,
                           padding: EdgeInsets.symmetric(horizontal: 5),

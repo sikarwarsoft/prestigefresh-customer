@@ -22,7 +22,7 @@ class Cart {
       quantity = 0.0;
       product = Product.fromJSON({});
       options = [];
-      print(CustomTrace(StackTrace.current, message: e));
+      // print(CustomTrace(StackTrace.current, message: e));
     }
   }
 

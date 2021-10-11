@@ -65,6 +65,8 @@ Future<Stream<Product>> getProduct(String productId) async {
         .transform(json.decoder)
         .map((data) => Helper.getData(data))
         .map((data) {
+          print("product data");
+          print(data.toString());
       return Product.fromJSON(data);
     });
   } catch (e) {

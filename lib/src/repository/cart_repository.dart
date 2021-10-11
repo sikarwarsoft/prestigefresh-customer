@@ -77,6 +77,7 @@ Future<Cart> updateCart(Cart cart) async {
   if (_user.apiToken == null) {
     return new Cart();
   }
+  print(cart.toMap());
   final String _apiToken = 'api_token=${_user.apiToken}';
   cart.userId = _user.id;
   final String url = '${GlobalConfiguration().getString('api_base_url')}carts/${cart.id}?$_apiToken';
@@ -86,6 +87,8 @@ Future<Cart> updateCart(Cart cart) async {
     headers: {HttpHeaders.contentTypeHeader: 'application/json'},
     body: json.encode(cart.toMap()),
   );
+  print("update cart response");
+  print(Cart.fromJSON(json.decode(response.body)['data']).toMap());
   return Cart.fromJSON(json.decode(response.body)['data']);
 }
 
