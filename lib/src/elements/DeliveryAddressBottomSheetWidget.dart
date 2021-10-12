@@ -74,11 +74,12 @@ class _DeliveryAddressBottomSheetWidgetState
                       'longitude': result.latLng.longitude,
                     }))
                         .then((value) async {
-                      _con
-                          .changeDeliveryAddress(
+                      _con.changeDeliveryAddress(
                           _con.addresses.last)
                           .then((value) {
-                        Navigator.of(widget.scaffoldKey.currentContext).pop();
+                            print("back me aa gaya");
+                            Navigator.pop(context);
+                        // Navigator.of(widget.scaffoldKey.currentContext).pop();
                       });
                     });
                     print("result = $result");
