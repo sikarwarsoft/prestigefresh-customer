@@ -2384,6 +2384,76 @@ class S {
       args: [],
     );
   }
+
+  /// `Type to start chat`
+  String get typeToStartChat {
+    return Intl.message(
+      'Type to start chat',
+      name: 'typeToStartChat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New message from`
+  String get newMessageFrom {
+    return Intl.message(
+      'New message from',
+      name: 'newMessageFrom',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select an image file`
+  String get please_select_an_image_file {
+    return Intl.message(
+      'Please select an image file',
+      name: 'please_select_an_image_file',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `For more details, please chat with our managers`
+  String get forMoreDetailsPleaseChatWithOurManagers {
+    return Intl.message(
+      'For more details, please chat with our managers',
+      name: 'forMoreDetailsPleaseChatWithOurManagers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Galleries`
+  String get galleries {
+    return Intl.message(
+      'Galleries',
+      name: 'galleries',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign-In to chat with our managers`
+  String get signinToChatWithOurManagers {
+    return Intl.message(
+      'Sign-In to chat with our managers',
+      name: 'signinToChatWithOurManagers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You don't have any conversations`
+  String get youDontHaveAnyConversations {
+    return Intl.message(
+      'You don\'t have any conversations',
+      name: 'youDontHaveAnyConversations',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

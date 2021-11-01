@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:markets/src/models/conversation.dart';
+import 'package:markets/src/repository/user_repository.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -287,6 +289,56 @@ class _DetailsWidgetState extends StateMVC<DetailsWidget> {
                                     horizontal: 20, vertical: 12),
                                 child: Helper.applyHtml(
                                     context, _con.market.information),
+                              ),
+
+                              Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                                margin: const EdgeInsets.symmetric(vertical: 5),
+                                color: Theme.of(context).primaryColor,
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: <Widget>[
+                                    Expanded(
+                                      child: Text(
+                                        currentUser.value.apiToken != null ? S.of(context).forMoreDetailsPleaseChatWithOurManagers : S.of(context).signinToChatWithOurManagers,
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 3,
+                                        style: Theme.of(context).textTheme.bodyText1,
+                                      ),
+                                    ),
+                                    SizedBox(width: 10),
+                                    SizedBox(
+                                      width: 42,
+                                      height: 42,
+                                      child: MaterialButton(
+                                        elevation: 0,
+                                        padding: EdgeInsets.all(0),
+                                        disabledColor: Theme.of(context).focusColor.withOpacity(0.5),
+                                        onPressed: currentUser.value.apiToken != null
+                                            ? () {
+                                          Navigator.of(context).pushNamed('/Chat',
+                                              arguments: RouteArgument(
+                                                  param: new Conversation(
+                                                      _con.market.users.map((e) {
+                                                        e.image = _con.market.image;
+                                                        return e;
+                                                      }).toList(),
+                                                      name: _con.market.name)));
+                                          print("userdata");
+                                          print(_con.market.users.toString());
+                                        }
+                                            : null,
+                                        child: Icon(
+                                          Icons.chat_outlined,
+                                          color: Theme.of(context).primaryColor,
+                                          size: 24,
+                                        ),
+                                        color: Theme.of(context).accentColor.withOpacity(0.9),
+                                        shape: StadiumBorder(),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                               Container(
                                 padding: const EdgeInsets.symmetric(

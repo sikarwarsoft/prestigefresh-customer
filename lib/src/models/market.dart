@@ -1,3 +1,5 @@
+import 'package:markets/src/models/user.dart';
+
 import '../models/media.dart';
 
 class Market {
@@ -20,6 +22,7 @@ class Market {
   double deliveryRange;
   double distance;
   String delivery_time;
+  List<User> users;
 
   Market();
 
@@ -56,6 +59,7 @@ class Market {
           ? double.parse(jsonMap['distance'].toString())
           : 0.0;
       delivery_time = jsonMap['delivery_time'];
+      users = jsonMap['users'] != null && (jsonMap['users'] as List).length > 0 ? List.from(jsonMap['users']).map((element) => User.fromJSON(element)).toSet().toList() : [];
     } catch (e) {
       id = '';
       name = '';
@@ -76,6 +80,7 @@ class Market {
       availableForDelivery = false;
       distance = 0.0;
       delivery_time = '';
+      users = [];
       print(e);
     }
   }

@@ -29,6 +29,8 @@ class MapController extends ControllerMVC {
         topMarkets.add(_market);
       });
       Helper.getMarker(_market.toMap()).then((marker) {
+        print("getmarket");
+        print(marker.toJson());
         setState(() {
           allMarkers.add(marker);
         });

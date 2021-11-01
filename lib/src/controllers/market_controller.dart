@@ -30,6 +30,8 @@ class MarketController extends ControllerMVC {
   void listenForMarket({String id, String message}) async {
     final Stream<Market> stream = await getMarket(id, deliveryAddress.value);
     stream.listen((Market _market) {
+      print("getmarket");
+      print(_market.toMap());
       setState(() => market = _market);
     }, onError: (a) {
       print(a);

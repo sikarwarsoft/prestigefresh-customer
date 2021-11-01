@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:markets/src/models/shared_product_model.dart';
+import 'package:markets/src/pages/chat.dart';
+import 'package:markets/src/pages/gallery.dart';
 import 'package:markets/src/pages/reffer.dart';
 import 'package:markets/src/pages/shared_product.dart';
 
@@ -82,6 +84,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => PaymentMethodsWidget());
       case '/DeliveryAddresses':
         return MaterialPageRoute(builder: (_) => DeliveryAddressesWidget());
+      case '/Chat':
+        return MaterialPageRoute(builder: (_) => ChatWidget(routeArgument: args as RouteArgument));
       case '/DeliveryPickup':
         return MaterialPageRoute(
             builder: (_) =>
@@ -116,6 +120,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => SettingsWidget());
       case '/Referal':
         return MaterialPageRoute(builder: (_) => Reffer());
+      case '/Gallery':
+        return MaterialPageRoute(builder: (_) => GalleryWidget(routeArgument: args as RouteArgument));
       case '/SharedProduct':
         final SharedProductModel args = settings.arguments;
         print(args.url);

@@ -79,6 +79,16 @@ class User {
     return map;
   }
 
+  Map toRestrictMap() {
+    var map = new Map<String, dynamic>();
+    map["id"] = id;
+    map["email"] = email;
+    map["name"] = name;
+    map["thumb"] = image?.thumb;
+    map["device_token"] = deviceToken;
+    return map;
+  }
+
   @override
   String toString() {
     var map = this.toMap();

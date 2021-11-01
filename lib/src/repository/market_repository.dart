@@ -161,7 +161,9 @@ Future<Stream<Market>> getMarket(String id, Address address) async {
     _queryParams['areaLon'] = address.longitude.toString();
     _queryParams['areaLat'] = address.latitude.toString();
   }
+  _queryParams['with'] = 'users';
   uri = uri.replace(queryParameters: _queryParams);
+  print(uri);
   try {
     final client = new http.Client();
     final streamedRest = await client.send(http.Request('get', uri));
@@ -210,6 +212,7 @@ Future<Stream<Review>> getRecentReviews() async {
         .map((data) => Helper.getData(data))
         .expand((data) => (data as List))
         .map((data) {
+          print("recent revivews");
       return Review.fromJSON(data);
     });
   } catch (e) {

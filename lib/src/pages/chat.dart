@@ -35,7 +35,10 @@ class _ChatWidgetState extends StateMVC<ChatWidget> {
 
   @override
   void initState() {
+    print("chatpageinit");
+    print(widget.routeArgument.param);
     _con.conversation = widget.routeArgument.param as Conversation;
+    print(_con.conversation.id);
     if (_con.conversation.id != null) {
       _con.listenForChats(_con.conversation);
     }

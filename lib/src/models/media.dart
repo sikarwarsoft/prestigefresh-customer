@@ -8,10 +8,14 @@ class Media {
   String icon;
   String size;
 
-  Media() {
-    url = "${GlobalConfiguration().getString('base_url')}images/image_default.png";
-    thumb = "${GlobalConfiguration().getString('base_url')}images/image_default.png";
-    icon = "${GlobalConfiguration().getString('base_url')}images/image_default.png";
+  Media({String id, String url, String thumb, String icon}) {
+    this.id = id ?? "";
+    this.url = url ??"${GlobalConfiguration().getString('base_url')}images/image_default.png";
+    this.thumb = thumb ??"${GlobalConfiguration().getString('base_url')}images/image_default.png";
+    this.icon = icon ?? "${GlobalConfiguration().getString('base_url')}images/image_default.png";
+    // url = "${GlobalConfiguration().getString('base_url')}images/image_default.png";
+    // thumb = "${GlobalConfiguration().getString('base_url')}images/image_default.png";
+    // icon = "${GlobalConfiguration().getString('base_url')}images/image_default.png";
   }
 
   Media.fromJSON(Map<String, dynamic> jsonMap) {

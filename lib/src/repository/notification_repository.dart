@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:global_configuration/global_configuration.dart';
 import 'package:http/http.dart' as http;
+import 'package:markets/src/repository/settings_repository.dart';
 
 import '../helpers/helper.dart';
 import '../models/notification.dart';
@@ -23,4 +25,26 @@ Future<Stream<Notification>> getNotifications() async {
   return streamedRest.stream.transform(utf8.decoder).transform(json.decoder).map((data) => Helper.getData(data)).expand((data) => (data as List)).map((data) {
     return Notification.fromJSON(data);
   });
+}
+
+Future<void> sendNotification(String body, String title, User user) async {
+  final data = {
+    "notification": {"body": "$body", "title": "$title"},
+    "priority": "high",
+    "data": {"click_action": "FLUTTER_NOTIFICATION_CLICK", "id": "messages", "status": "done"},
+    "to": "${user.deviceToken}"
+  };
+  final String url = 'https://fcm.googleapis.com/fcm/send';
+  final client = new http.Client();
+  final response = await client.post(
+    url,
+    headers: {
+      HttpHeaders.contentTypeHeader: 'application/json',
+      HttpHeaders.authorizationHeader: "key=${setting.value.fcmKey}",
+    },
+    body: json.encode(data),
+  );
+  if (response.statusCode != 200) {
+    print('notification sending failed');
+  }
 }
