@@ -1,41 +1,42 @@
 {
   "project_info": {
-    "project_number": "95150199145",
-    "project_id": "dawatme-e09bd",
-    "storage_bucket": "dawatme-e09bd.appspot.com"
+    "project_number": "970453389131",
+    "firebase_url": "https://prestige-fresh.firebaseio.com",
+    "project_id": "prestige-fresh",
+    "storage_bucket": "prestige-fresh.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:95150199145:android:ed19206af75d9e659cedf8",
+        "mobilesdk_app_id": "1:970453389131:android:af9c5a5eef776c46dd62ce",
         "android_client_info": {
-          "package_name": "com.ssoftwares.dawat.driver"
+          "package_name": "com.app.prestigefresh"
         }
       },
       "oauth_client": [
         {
-          "client_id": "95150199145-009vibgrirgm88nh5inv8lbv641mg2gp.apps.googleusercontent.com",
+          "client_id": "970453389131-62t9qushkqoh8t1tgtlfce9snsdt2lim.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.ssoftwares.dawat.driver",
-            "certificate_hash": "b88626bb13ca4be63a49cbf2bcfbaf0b1ea6bcc9"
+            "package_name": "com.app.prestigefresh",
+            "certificate_hash": "f53bfae229f6061e29bdbdbfab0cb7bf712df607"
           }
         },
         {
-          "client_id": "95150199145-44spo440o2lk4du65klj2rsc801k5rd9.apps.googleusercontent.com",
+          "client_id": "970453389131-6aaeq04a8ek2b8q83qef0m6hi10u6nn8.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA4bVtR4_uqL4WN0VmkdzZxE5yQwjKP7Ds"
+          "current_key": "AIzaSyBeA9kPeXasj0VAipuqeMLofvstIcDWcik"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "95150199145-44spo440o2lk4du65klj2rsc801k5rd9.apps.googleusercontent.com",
+              "client_id": "970453389131-6aaeq04a8ek2b8q83qef0m6hi10u6nn8.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -44,35 +45,35 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:95150199145:android:7364bcb3b579ad649cedf8",
+        "mobilesdk_app_id": "1:970453389131:android:a2eb98d3bcaf84ecdd62ce",
         "android_client_info": {
-          "package_name": "com.ssoftwares.dawat.me"
+          "package_name": "com.app.prestigefreshrider"
         }
       },
       "oauth_client": [
         {
-          "client_id": "95150199145-mtag2kifra9a24ferul4ltunr4q7jlln.apps.googleusercontent.com",
+          "client_id": "970453389131-5qkpa1s96c13tm6s45tehigbtu63sj01.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.ssoftwares.dawat.me",
-            "certificate_hash": "b88626bb13ca4be63a49cbf2bcfbaf0b1ea6bcc9"
+            "package_name": "com.app.prestigefreshrider",
+            "certificate_hash": "f53bfae229f6061e29bdbdbfab0cb7bf712df607"
           }
         },
         {
-          "client_id": "95150199145-44spo440o2lk4du65klj2rsc801k5rd9.apps.googleusercontent.com",
+          "client_id": "970453389131-6aaeq04a8ek2b8q83qef0m6hi10u6nn8.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA4bVtR4_uqL4WN0VmkdzZxE5yQwjKP7Ds"
+          "current_key": "AIzaSyBeA9kPeXasj0VAipuqeMLofvstIcDWcik"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "95150199145-44spo440o2lk4du65klj2rsc801k5rd9.apps.googleusercontent.com",
+              "client_id": "970453389131-6aaeq04a8ek2b8q83qef0m6hi10u6nn8.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -81,35 +82,80 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:95150199145:android:3548fe2003b8d7589cedf8",
+        "mobilesdk_app_id": "1:970453389131:android:97cac7839f3e2972dd62ce",
         "android_client_info": {
-          "package_name": "com.ssoftwares.dawat.vendor"
+          "package_name": "com.app.prestigefreshvendor"
         }
       },
       "oauth_client": [
         {
-          "client_id": "95150199145-3khgsf8lsp6hko2t9g6prs24gfodl3fm.apps.googleusercontent.com",
+          "client_id": "970453389131-9qdi7vsg8ejsr6cvs6dvt379h6e5nk53.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.ssoftwares.dawat.vendor",
-            "certificate_hash": "b88626bb13ca4be63a49cbf2bcfbaf0b1ea6bcc9"
+            "package_name": "com.app.prestigefreshvendor",
+            "certificate_hash": "f53bfae229f6061e29bdbdbfab0cb7bf712df607"
           }
         },
         {
-          "client_id": "95150199145-44spo440o2lk4du65klj2rsc801k5rd9.apps.googleusercontent.com",
+          "client_id": "970453389131-6aaeq04a8ek2b8q83qef0m6hi10u6nn8.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA4bVtR4_uqL4WN0VmkdzZxE5yQwjKP7Ds"
+          "current_key": "AIzaSyBeA9kPeXasj0VAipuqeMLofvstIcDWcik"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "95150199145-44spo440o2lk4du65klj2rsc801k5rd9.apps.googleusercontent.com",
+              "client_id": "970453389131-6aaeq04a8ek2b8q83qef0m6hi10u6nn8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:970453389131:android:2968502840757306dd62ce",
+        "android_client_info": {
+          "package_name": "com.ssoftwares.prestigefresh"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "970453389131-88ktojg39d4jmae401r2aqep0t55nssv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ssoftwares.prestigefresh",
+            "certificate_hash": "f53bfae229f6061e29bdbdbfab0cb7bf712df607"
+          }
+        },
+        {
+          "client_id": "970453389131-9c8o0ogu8u6c7568up7t90d36ps1b3pf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ssoftwares.prestigefresh",
+            "certificate_hash": "97958904cd1abb73da610df95f98ad46b22b6ba4"
+          }
+        },
+        {
+          "client_id": "970453389131-6aaeq04a8ek2b8q83qef0m6hi10u6nn8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeA9kPeXasj0VAipuqeMLofvstIcDWcik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "970453389131-6aaeq04a8ek2b8q83qef0m6hi10u6nn8.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -1,5 +1,5 @@
 class Constant {
-  static String packageName = "com.ssoftwares.dawat.me";
-  static String uri = "https://dawat.page.link";
-  static String appName = "Dawat";
+  static String packageName = "com.ssoftwares.prestigefresh";
+  static String uri = "https://prestigefresh.page.link";
+  static String appName = "Prestige Fresh";
 }

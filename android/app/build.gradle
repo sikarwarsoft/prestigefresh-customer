@@ -42,7 +42,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.ssoftwares.dawat.me"
+        applicationId "com.ssoftwares.prestigefresh"
         minSdkVersion 19
         targetSdkVersion 30
         buildToolsVersion '29.0.0'

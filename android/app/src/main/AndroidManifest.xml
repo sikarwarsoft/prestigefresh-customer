@@ -12,11 +12,11 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name=".Application"
-        android:label="Dawat"
+        android:label="Prestige Fresh"
         android:icon="@mipmap/ic_launcher">
 
         <meta-data android:name="com.google.android.geo.API_KEY"
-                   android:value="AIzaSyC_593W-8Gp1R785sZfLHmlzCrnvuAnJh4"/>
+                   android:value="AIzaSyANc8IMyeOxw5bakqFelHEHJN-IcX-wXeI"/>
         <meta-data
                 android:name="com.google.firebase.messaging.default_notification_icon"
                 android:resource="@mipmap/ic_notification" />
